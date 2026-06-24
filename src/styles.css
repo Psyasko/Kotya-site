@@ -1766,3 +1766,466 @@ h1 {
     stroke-dashoffset: 0;
   }
 }
+
+/* === Stability + responsive repair pass === */
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+.site-shell {
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+/* Do not let decorative layers define layout width */
+.ambient,
+.dragon-route,
+.hero::before,
+.panel-dragon-curl,
+.section-serpent,
+.clinic-dragon,
+.contact-dragon,
+.contact-curve,
+.principles-curve,
+.portrait-curve,
+.portrait-dragon-shadow,
+.portrait-whisker,
+.portrait-cloud,
+.leaf-field,
+.serpent-line,
+.dragon-mark,
+.cloud-curl {
+  max-width: none;
+  pointer-events: none;
+}
+
+/* Cards: decorative shape outside, text in protected area */
+.service-card,
+.cert-card,
+.principle-item,
+.clinic-row,
+.contact-link {
+  min-width: 0;
+}
+
+.service-card,
+.cert-card {
+  position: relative;
+  overflow: hidden;
+  contain: paint;
+}
+
+.card-safe-area,
+.service-card h3,
+.service-card p,
+.cert-card h3,
+.cert-card p,
+.principle-item span,
+.clinic-row strong,
+.contact-copy p,
+.contact-link strong {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.card-safe-area {
+  box-sizing: border-box;
+}
+
+/* Fix contact section hierarchy: content always above decoration */
+.contacts {
+  isolation: isolate;
+}
+
+.contact-copy,
+.contact-actions {
+  z-index: 5;
+}
+
+.contact-curve,
+.contact-dragon,
+.contact-cloud {
+  z-index: 0;
+}
+
+/* Tablet/mobile redesign: no horizontal zoom, no full-page dragon route */
+@media (max-width: 900px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .site-shell {
+    width: 100%;
+    padding: 10px 14px 34px;
+  }
+
+  .topbar {
+    top: 8px;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border-radius: 28px 28px 28px 16px;
+  }
+
+  .brand {
+    max-width: 100%;
+  }
+
+  .brand span:last-child {
+    min-width: 0;
+  }
+
+  .brand strong,
+  .brand small {
+    max-width: calc(100vw - 104px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    min-height: auto;
+    padding: 10px 0 54px;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(38px, 11.8vw, 56px);
+    line-height: 0.98;
+    letter-spacing: -0.038em;
+  }
+
+  h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 9.2vw, 46px);
+    line-height: 1;
+  }
+
+  h3 {
+    font-size: clamp(24px, 6.4vw, 30px);
+  }
+
+  .lead {
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.58;
+  }
+
+  .hero-actions,
+  .contact-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn,
+  .contact-link {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .quick-info {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quick-info span {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero-visual {
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 14px 0 0;
+    contain: paint;
+  }
+
+  .portrait-frame {
+    width: min(100%, 420px);
+    margin: 0 auto;
+    border-radius: 42px 72px 48px 82px / 56px 44px 78px 52px;
+  }
+
+  .portrait-frame img {
+    height: min(430px, 108vw);
+    object-position: center 18%;
+  }
+
+  /* The photo curl is now tied to the portrait, not the viewport */
+  .portrait-curve {
+    width: 122%;
+    left: -11%;
+    top: -8%;
+    opacity: 0.7;
+    transform: rotate(-11deg);
+  }
+
+  .portrait-dragon-shadow {
+    width: 118%;
+    right: -9%;
+    top: -9%;
+    opacity: 0.08;
+  }
+
+  .portrait-whisker {
+    width: 58%;
+    height: 34%;
+    opacity: 0.32;
+    filter: none;
+  }
+
+  .portrait-whisker-one {
+    right: -3%;
+    top: 8%;
+  }
+
+  .portrait-whisker-two {
+    left: -5%;
+    bottom: 10%;
+  }
+
+  .portrait-cloud {
+    display: none;
+  }
+
+  .portrait-note {
+    left: 8%;
+    right: 8%;
+    bottom: 5%;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 22px 30px 22px 34px;
+  }
+
+  /* Full-page route breaks mobile. Keep dragon style only as local curls. */
+  .dragon-route,
+  .serpent-line-one,
+  .serpent-line-two,
+  .section-serpent,
+  .panel-dragon-curl,
+  .principles-curve,
+  .contact-curve,
+  .contact-dragon,
+  .dragon-mark-two,
+  .dragon-mark-three,
+  .cloud-two {
+    display: none !important;
+  }
+
+  .dragon-mark-one {
+    width: 520px;
+    right: -260px;
+    top: 64px;
+    opacity: 0.07;
+  }
+
+  .leaf-field {
+    opacity: 0.055;
+  }
+
+  .about,
+  .clinic,
+  .principles,
+  .contacts,
+  .section-block {
+    margin-bottom: 70px;
+  }
+
+  .about,
+  .clinic,
+  .contacts {
+    display: block;
+  }
+
+  .about,
+  .principles,
+  .clinic-card,
+  .contacts {
+    padding: 24px;
+    border-radius: 28px 42px 32px 46px / 36px 28px 44px 30px;
+    overflow: hidden;
+  }
+
+  .section-heading,
+  .section-kicker,
+  .contact-copy {
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .organic-grid,
+  .cert-grid,
+  .principle-list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-card,
+  .cert-card {
+    min-height: 0;
+    border-radius: 26px 38px 28px 42px / 34px 26px 42px 30px !important;
+    margin-top: 0 !important;
+  }
+
+  .service-card::before,
+  .cert-card::before {
+    border-radius: inherit;
+  }
+
+  .organic-outline {
+    inset: 8px;
+    border-radius: inherit;
+  }
+
+  .card-safe-area {
+    min-height: 0;
+    padding: 24px 22px;
+  }
+
+  .service-card .card-safe-area::after,
+  .cert-card .card-safe-area::after {
+    width: 92px;
+    height: 46px;
+    opacity: 0.06;
+  }
+
+  .principle-item,
+  .clinic-row,
+  .contact-link {
+    border-radius: 22px 32px 24px 36px / 30px 22px 36px 24px;
+  }
+
+  .principle-item {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 17px 18px;
+  }
+
+  .clinic {
+    gap: 26px;
+  }
+
+  .clinic-card {
+    margin-top: 24px;
+  }
+
+  .clinic-row {
+    padding: 18px;
+  }
+
+  .contacts {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .contact-actions {
+    gap: 12px;
+  }
+
+  .contact-link {
+    padding: 16px 17px;
+  }
+
+  .footer {
+    display: block;
+  }
+
+  .footer p + p {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-shell {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .topbar {
+    padding: 9px 10px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand strong {
+    font-size: 19px;
+  }
+
+  .brand small {
+    font-size: 11px;
+  }
+
+  h1 {
+    font-size: clamp(36px, 12.4vw, 48px);
+  }
+
+  h2 {
+    font-size: clamp(31px, 10.5vw, 42px);
+  }
+
+  .portrait-frame img {
+    height: min(390px, 106vw);
+  }
+
+  .about,
+  .principles,
+  .clinic-card,
+  .contacts {
+    padding: 20px;
+  }
+
+  .card-safe-area {
+    padding: 22px 19px;
+  }
+
+  .icon-box {
+    margin-bottom: 16px;
+  }
+}
+
+/* Performance mode for touch devices */
+@media (hover: none), (pointer: coarse) {
+  .night-garden,
+  .mist,
+  .leaf-field,
+  .portrait-aura,
+  .route-body,
+  .silk-line,
+  .silk-whisker {
+    animation: none !important;
+  }
+
+  .topbar {
+    backdrop-filter: none;
+  }
+
+  .route-glow,
+  .portrait-whisker {
+    filter: none !important;
+  }
+}

@@ -49,3 +49,16 @@ const specialist = {
   viberUrl: '#'
 };
 ```
+
+## Mobile layout repair pass
+
+This version adds a responsive stability patch:
+
+- removes horizontal overflow on mobile;
+- disables the full-page dragon route on small screens;
+- keeps only local portrait curls and subtle background dragon detail on mobile;
+- anchors portrait decoration to the portrait container;
+- forces organic cards into a protected text safe-area;
+- simplifies rounded card shapes on mobile;
+- stacks contact buttons and clinic rows safely;
+- disables heavy animations/filters on touch devices.
