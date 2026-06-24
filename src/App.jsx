@@ -79,6 +79,64 @@ function CloudCurl({ className = '' }) {
   return <span className={`cloud-curl ${className}`} aria-hidden="true" />;
 }
 
+
+function DragonRoute() {
+  return (
+    <div className="dragon-route" aria-hidden="true">
+      <svg viewBox="0 0 900 3650" preserveAspectRatio="none" fill="none">
+        <defs>
+          <linearGradient id="dragonRouteGold" x1="160" y1="0" x2="720" y2="3650" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#fff3a3" stopOpacity="0.95" />
+            <stop offset="0.18" stopColor="#ffe600" stopOpacity="0.85" />
+            <stop offset="0.48" stopColor="#f0d76d" stopOpacity="0.72" />
+            <stop offset="0.78" stopColor="#9fccc7" stopOpacity="0.38" />
+            <stop offset="1" stopColor="#ffe600" stopOpacity="0.62" />
+          </linearGradient>
+          <linearGradient id="dragonRouteMint" x1="0" y1="0" x2="900" y2="3650" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#9fccc7" stopOpacity="0.34" />
+            <stop offset="0.52" stopColor="#85b084" stopOpacity="0.28" />
+            <stop offset="1" stopColor="#ffe600" stopOpacity="0.2" />
+          </linearGradient>
+          <filter id="routeGlow" x="-20%" y="-10%" width="140%" height="120%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <path className="route-glow" d="M626 130C733 263 668 398 517 482C320 592 279 764 459 916C641 1071 662 1228 484 1395C307 1562 352 1735 604 1854C822 1957 779 2133 540 2254C321 2364 245 2553 460 2717C665 2874 716 3037 556 3208C464 3306 406 3431 452 3596" />
+        <path className="route-body" d="M626 130C733 263 668 398 517 482C320 592 279 764 459 916C641 1071 662 1228 484 1395C307 1562 352 1735 604 1854C822 1957 779 2133 540 2254C321 2364 245 2553 460 2717C665 2874 716 3037 556 3208C464 3306 406 3431 452 3596" />
+        <path className="route-shadow-line" d="M688 288C581 369 491 422 420 519C340 630 345 747 462 858M388 1460C471 1514 567 1561 629 1648C699 1745 666 1853 558 1930M352 2508C430 2607 571 2668 615 2795C650 2896 608 3002 520 3108" />
+
+        <g className="route-head" transform="translate(532 32)">
+          <path d="M79 98C132 26 224 38 278 101C223 91 183 109 154 151C128 190 91 205 38 193C61 166 70 134 79 98Z" />
+          <path d="M120 93C84 54 41 39 0 43C31 69 50 95 58 124" />
+          <path d="M164 77C190 35 227 10 278 1C260 35 241 62 219 83" />
+          <path d="M152 150C216 164 267 196 305 247" />
+          <path d="M130 171C82 218 31 243 -24 245" />
+          <circle cx="203" cy="103" r="5" />
+        </g>
+
+        <g className="route-whiskers">
+          <path d="M683 124C757 98 819 108 869 153" />
+          <path d="M676 155C759 166 813 204 842 269" />
+          <path d="M600 188C529 198 468 228 418 279" />
+          <path d="M598 214C510 269 454 339 429 425" />
+        </g>
+
+        <g className="route-clouds">
+          <path d="M201 705C244 652 312 650 340 699C380 681 436 692 451 736C408 733 374 746 349 775C300 740 252 738 201 705Z" />
+          <path d="M576 1261C628 1210 699 1222 714 1276C759 1268 805 1296 815 1340C761 1326 712 1338 669 1377C643 1322 612 1285 576 1261Z" />
+          <path d="M116 2124C168 2082 229 2094 250 2142C292 2135 337 2158 354 2202C302 2191 253 2200 208 2229C187 2175 157 2140 116 2124Z" />
+          <path d="M568 2926C611 2881 673 2884 703 2931C742 2917 789 2930 811 2967C762 2965 719 2977 681 3011C654 2970 617 2942 568 2926Z" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function AmbientBackground() {
   return (
     <div className="ambient" aria-hidden="true">
@@ -122,6 +180,7 @@ function App() {
     <>
       <AmbientBackground />
       <main className="site-shell">
+        <DragonRoute />
         <header className="topbar reveal is-visible">
           <a className="brand" href="#hero" aria-label="На головний екран">
             <span className="brand-mark"><Feather size={20} /></span>
