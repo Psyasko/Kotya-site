@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import {
   Award,
   CalendarDays,
-  ChevronRight,
+  Feather,
   HeartHandshake,
   Leaf,
   MapPin,
@@ -25,20 +25,20 @@ const specialist = {
   viberLabel: 'Viber'
 };
 
-const workAreas = [
+const services = [
   {
     title: 'Класичний масаж',
-    text: 'Базова робота з тілом, мʼязовою напругою та загальним відновленням.',
+    text: 'Базова робота з тілом, мʼязовою напругою та загальним відновленням без зайвого тиску.',
     icon: Waves
   },
   {
     title: 'Спина та шия',
-    text: 'Фокус на зонах, де часто накопичується напруга через сидячу роботу, стрес або навантаження.',
+    text: 'Фокус на зонах, де часто накопичується напруга через стрес, сидячу роботу або навантаження.',
     icon: Sparkles
   },
   {
     title: 'Релакс-масаж',
-    text: 'Мʼякий темп, зниження напруги, відчуття спокою та повернення контакту з тілом.',
+    text: 'Мʼякий темп, спокійна атмосфера та повернення відчуття контакту з тілом.',
     icon: HeartHandshake
   },
   {
@@ -62,16 +62,28 @@ const certificates = [
   'Сертифікат 4'
 ];
 
+function DragonSilk({ className = '' }) {
+  return (
+    <svg className={`dragon-silk ${className}`} viewBox="0 0 920 520" fill="none" aria-hidden="true">
+      <path className="silk-line silk-main" d="M77 333C183 153 343 119 473 173C626 237 555 379 412 351C283 326 319 169 500 89C671 14 833 99 854 234C879 399 681 503 514 439C365 381 315 247 425 154" />
+      <path className="silk-line silk-soft" d="M148 402C238 296 332 265 437 295C552 328 623 301 663 221C701 146 763 116 842 143" />
+      <path className="silk-leaf" d="M351 235C317 218 284 221 260 244C295 255 323 255 351 235Z" />
+      <path className="silk-leaf" d="M589 308C627 303 654 282 670 249C630 249 606 269 589 308Z" />
+      <path className="silk-leaf" d="M492 123C457 105 427 108 401 132C434 145 462 143 492 123Z" />
+    </svg>
+  );
+}
+
 function AmbientBackground() {
   return (
     <div className="ambient" aria-hidden="true">
-      <div className="ambient-image" />
-      <div className="glow glow-one" />
-      <div className="glow glow-two" />
+      <div className="night-garden" />
+      <div className="mist mist-one" />
+      <div className="mist mist-two" />
+      <div className="leaf-field leaf-field-left" />
+      <div className="leaf-field leaf-field-right" />
+      <DragonSilk className="ambient-dragon" />
       <div className="gold-dust" />
-      <img className="decor decor-fern" src="/decor/fern-gold.svg" alt="" />
-      <img className="decor decor-floral" src="/decor/floral-corner.svg" alt="" />
-      <img className="decor decor-dragon" src="/decor/dragon-watermark.svg" alt="" />
     </div>
   );
 }
@@ -88,7 +100,7 @@ function App() {
           }
         });
       },
-      { threshold: 0.16, rootMargin: '0px 0px -70px 0px' }
+      { threshold: 0.14, rootMargin: '0px 0px -80px 0px' }
     );
 
     elements.forEach((element) => observer.observe(element));
@@ -101,7 +113,7 @@ function App() {
       <main className="site-shell">
         <header className="topbar reveal is-visible">
           <a className="brand" href="#hero" aria-label="На головний екран">
-            <span className="brand-mark">M</span>
+            <span className="brand-mark"><Feather size={20} /></span>
             <span>
               <strong>{specialist.name}</strong>
               <small>{specialist.role}</small>
@@ -110,30 +122,25 @@ function App() {
 
           <nav className="nav" aria-label="Основна навігація">
             <a href="#about">Про спеціаліста</a>
-            <a href="#areas">Напрямки</a>
+            <a href="#services">Напрямки</a>
             <a href="#clinic">Клініка</a>
             <a href="#certificates">Сертифікати</a>
             <a href="#contacts">Контакти</a>
           </nav>
         </header>
 
-        <section id="hero" className="hero section-grid">
+        <section id="hero" className="hero">
           <div className="hero-copy reveal is-visible">
             <p className="eyebrow">Професійна візитівка</p>
-            <h1>Масажист у клініці: уважна робота з тілом, напругою та відновленням</h1>
+            <h1>Масажист у клініці з мʼяким, уважним підходом до тіла</h1>
             <p className="lead">
               Акуратний масаж, спокійна комунікація та індивідуальний підбір технік.
-              Щоб уточнити актуальну доступність, графік або спосіб запису через клініку — напишіть у зручний месенджер.
+              Щоб уточнити графік, місто роботи або спосіб запису через клініку — напишіть у зручний месенджер.
             </p>
 
             <div className="hero-actions">
-              <a className="btn primary" href="#contacts">
-                Уточнити доступність
-                <ChevronRight size={18} />
-              </a>
-              <a className="btn ghost" href={specialist.telegramUrl}>
-                Написати в Telegram
-              </a>
+              <a className="btn primary" href="#contacts">Уточнити доступність</a>
+              <a className="btn ghost" href={specialist.telegramUrl}>Написати в Telegram</a>
             </div>
 
             <div className="quick-info" aria-label="Коротка інформація">
@@ -142,50 +149,51 @@ function App() {
             </div>
           </div>
 
-          <div className="portrait-card reveal is-visible" aria-label="Фото спеціаліста">
-            <div className="portrait-ornament" />
-            <div className="portrait-glow" />
-            <img src="/images/profile.jpg" alt="Фото спеціаліста з масажу" />
-            <div className="portrait-caption">
+          <div className="hero-visual reveal is-visible">
+            <DragonSilk className="portrait-curve" />
+            <div className="portrait-aura" />
+            <div className="portrait-frame">
+              <img src="/images/profile.jpg" alt="Фото спеціаліста з масажу" />
+            </div>
+            <div className="portrait-note">
               <span>{specialist.role}</span>
               <strong>{specialist.city}</strong>
             </div>
           </div>
         </section>
 
-        <section id="about" className="about section-grid soft-card reveal">
-          <div>
+        <section id="about" className="about organic-panel reveal">
+          <div className="section-kicker">
             <p className="eyebrow">Про спеціаліста</p>
-            <h2>Спокійний професійний підхід без зайвих обіцянок</h2>
+            <h2>Витончений підхід без зайвої демонстративності</h2>
           </div>
-          <div className="text-block">
+          <div className="text-flow">
             <p>
               Спеціаліст працює в клініці та допомагає клієнтам зменшувати тілесну напругу,
-              відновлюватися після навантаження й краще відчувати власне тіло. Формат роботи
-              залежить від стану клієнта, запиту та доступного графіка прийому.
+              відновлюватися після навантаження й уважніше відчувати власне тіло.
             </p>
             <p>
-              Сайт не є сторінкою приватної практики. Він створений як візитівка: коротко показати
-              напрямки роботи, місце прийому, сертифікати та зручний спосіб уточнення доступності.
+              Цей сайт — не сторінка приватної практики, а професійна візитівка: напрямки роботи,
+              місце прийому, сертифікати та швидкий спосіб уточнити доступність.
             </p>
           </div>
         </section>
 
-        <section id="areas" className="section-block reveal">
+        <section id="services" className="section-block reveal">
           <div className="section-heading">
             <p className="eyebrow">Напрямки роботи</p>
-            <h2>Основні формати масажу</h2>
+            <h2>Форми роботи з тілом</h2>
             <p>
-              Напрямок і інтенсивність підбираються не за шаблоном, а під актуальний стан тіла та запит клієнта.
+              Кожен формат підбирається під стан клієнта, рівень напруги та доступний графік прийому.
             </p>
           </div>
 
-          <div className="cards-grid">
-            {workAreas.map((item) => {
+          <div className="organic-grid">
+            {services.map((item) => {
               const Icon = item.icon;
               return (
                 <article className="service-card" key={item.title}>
-                  <div className="card-shine" />
+                  <span className="organic-outline" />
                   <div className="icon-box"><Icon size={22} /></div>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
@@ -195,10 +203,11 @@ function App() {
           </div>
         </section>
 
-        <section className="principles soft-card reveal">
+        <section className="principles reveal">
+          <DragonSilk className="principles-curve" />
           <div className="section-heading compact">
             <p className="eyebrow">Підхід</p>
-            <h2>Що важливо в роботі</h2>
+            <h2>Спокій, межі, точність</h2>
           </div>
           <div className="principle-list">
             {principles.map((item) => (
@@ -210,16 +219,16 @@ function App() {
           </div>
         </section>
 
-        <section id="clinic" className="clinic section-grid reveal">
-          <div>
+        <section id="clinic" className="clinic reveal">
+          <div className="section-kicker">
             <p className="eyebrow">Місце роботи</p>
             <h2>Прийом у клініці</h2>
             <p className="lead small">
-              Актуальну адресу, графік та можливість запису краще уточнювати перед візитом.
+              Актуальну адресу, графік і можливість запису краще уточнювати перед візитом.
             </p>
           </div>
 
-          <div className="clinic-card">
+          <div className="clinic-card organic-panel thin">
             <div className="clinic-row">
               <MapPin size={20} />
               <div>
@@ -249,14 +258,14 @@ function App() {
             <p className="eyebrow">Сертифікати</p>
             <h2>Місце під підтвердження навчання</h2>
             <p>
-              Заміни ці блоки на реальні фото сертифікатів у наступній версії сайту.
+              Плейсхолдери можна замінити на реальні фото сертифікатів без зміни структури сайту.
             </p>
           </div>
 
           <div className="cert-grid">
             {certificates.map((certificate) => (
               <article className="cert-card" key={certificate}>
-                <div className="cert-line" />
+                <span className="organic-outline" />
                 <Award size={30} />
                 <h3>{certificate}</h3>
                 <p>Фото або короткий опис сертифіката</p>
@@ -266,6 +275,7 @@ function App() {
         </section>
 
         <section id="contacts" className="contacts reveal">
+          <DragonSilk className="contact-curve" />
           <div className="contact-copy">
             <p className="eyebrow">Контакти</p>
             <h2>Уточнити доступність</h2>
@@ -295,9 +305,7 @@ function App() {
 
         <footer className="footer reveal">
           <p>© {new Date().getFullYear()} {specialist.name}. Професійна візитівка спеціаліста.</p>
-          <p>
-            Спеціаліст працює в клініці. Масаж не замінює консультацію лікаря за наявності медичних показань.
-          </p>
+          <p>Спеціаліст працює в клініці. Масаж не замінює консультацію лікаря за наявності медичних показань.</p>
         </footer>
       </main>
     </>
