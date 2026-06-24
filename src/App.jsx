@@ -14,14 +14,14 @@ import {
 } from 'lucide-react';
 
 const specialist = {
-  name: 'Імʼя спеціаліста',
+  name: 'Катерина',
   role: 'Масажист у клініці',
-  city: '[Місто — заглушка]',
-  clinicAddress: '[Адреса клініки — заглушка]',
-  schedule: '[Графік уточнюється]',
-  telegramUrl: '#',
+  city: 'Львів',
+  clinic: 'DeMassage',
+  schedule: '9:00–20:00',
+  telegramUrl: 'https://t.me/katiya06',
   viberUrl: '#',
-  telegramLabel: 'Telegram',
+  telegramLabel: '@katiya06',
   viberLabel: 'Viber'
 };
 
@@ -303,7 +303,7 @@ function App() {
             <p className="eyebrow">Місце роботи</p>
             <h2>Прийом у клініці</h2>
             <p className="lead small">
-              Актуальну адресу, графік і можливість запису краще уточнювати перед візитом.
+              Актуальну доступність, графік і спосіб запису краще уточнювати перед візитом.
             </p>
           </div>
 
@@ -317,10 +317,10 @@ function App() {
               </div>
             </div>
             <div className="clinic-row">
-              <MapPin size={20} />
+              <HeartHandshake size={20} />
               <div>
-                <span>Адреса клініки</span>
-                <strong>{specialist.clinicAddress}</strong>
+                <span>Клініка</span>
+                <strong>{specialist.clinic}</strong>
               </div>
             </div>
             <div className="clinic-row">
