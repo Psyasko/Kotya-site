@@ -1,0 +1,16 @@
+<svg width="960" height="960" viewBox="0 0 960 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#F0D76D" stroke-linecap="round" stroke-linejoin="round" opacity=".78">
+    <path d="M663 122C590 99 493 116 432 178C370 241 374 326 447 359C535 399 647 344 667 253C682 185 636 148 580 158" stroke-width="2.1"/>
+    <path d="M451 359C327 374 219 467 218 586C216 722 368 793 524 724C657 665 721 534 676 424C642 341 565 318 451 359Z" stroke-width="2.1"/>
+    <path d="M663 122L728 71L710 156L797 139L722 196" stroke-width="1.55"/>
+    <path d="M533 161L509 83L574 130L609 58L623 145" stroke-width="1.55"/>
+    <path d="M668 252C733 235 776 194 805 132" stroke-width="1.15"/>
+    <path d="M676 424C745 398 801 347 837 274" stroke-width="1.15"/>
+    <path d="M524 724C522 779 546 823 596 855" stroke-width="1.15"/>
+    <path d="M218 586C157 606 101 593 51 548" stroke-width="1.15"/>
+    <path d="M431 178C370 158 322 119 286 60" stroke-width="1.15"/>
+    <path d="M561 258C585 255 606 265 621 287" stroke-width="1.05"/>
+    <path d="M493 477C558 467 610 488 650 541" stroke-width="1.05"/>
+    <path d="M386 582C454 559 515 576 570 634" stroke-width="1.05"/>
+  </g>
+</svg>

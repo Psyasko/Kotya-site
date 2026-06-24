@@ -64,14 +64,19 @@ const certificates = [
 
 function DragonSilk({ className = '' }) {
   return (
-    <svg className={`dragon-silk ${className}`} viewBox="0 0 920 520" fill="none" aria-hidden="true">
-      <path className="silk-line silk-main" d="M77 333C183 153 343 119 473 173C626 237 555 379 412 351C283 326 319 169 500 89C671 14 833 99 854 234C879 399 681 503 514 439C365 381 315 247 425 154" />
-      <path className="silk-line silk-soft" d="M148 402C238 296 332 265 437 295C552 328 623 301 663 221C701 146 763 116 842 143" />
-      <path className="silk-leaf" d="M351 235C317 218 284 221 260 244C295 255 323 255 351 235Z" />
-      <path className="silk-leaf" d="M589 308C627 303 654 282 670 249C630 249 606 269 589 308Z" />
-      <path className="silk-leaf" d="M492 123C457 105 427 108 401 132C434 145 462 143 492 123Z" />
+    <svg className={`dragon-silk ${className}`} viewBox="0 0 1180 680" fill="none" aria-hidden="true">
+      <path className="silk-line silk-main" d="M79 458C184 263 349 207 498 258C659 314 635 475 470 462C315 449 312 262 498 153C671 51 913 73 1007 230C1102 389 965 566 750 561C574 557 479 457 514 341" />
+      <path className="silk-line silk-soft" d="M160 536C270 405 396 372 529 409C665 446 775 398 856 276C904 203 971 173 1084 184" />
+      <path className="silk-whisker" d="M506 153C530 119 567 97 618 84M506 153C549 154 585 142 615 118M498 258C535 244 565 221 590 188M750 561C755 604 779 635 822 657M750 561C712 595 671 612 626 612M470 462C424 485 383 486 346 467" />
+      <path className="silk-leaf" d="M830 227C874 209 910 178 938 134C895 138 861 168 830 227Z" />
+      <path className="silk-leaf muted" d="M360 296C315 272 272 273 231 298C273 322 316 322 360 296Z" />
+      <path className="silk-leaf" d="M610 465C652 468 689 451 721 415C677 406 640 423 610 465Z" />
     </svg>
   );
+}
+
+function CloudCurl({ className = '' }) {
+  return <span className={`cloud-curl ${className}`} aria-hidden="true" />;
 }
 
 function AmbientBackground() {
@@ -82,7 +87,13 @@ function AmbientBackground() {
       <div className="mist mist-two" />
       <div className="leaf-field leaf-field-left" />
       <div className="leaf-field leaf-field-right" />
-      <DragonSilk className="ambient-dragon" />
+      <span className="dragon-mark dragon-mark-one" />
+      <span className="dragon-mark dragon-mark-two" />
+      <span className="dragon-mark dragon-mark-three" />
+      <span className="serpent-line serpent-line-one" />
+      <span className="serpent-line serpent-line-two" />
+      <CloudCurl className="cloud-one" />
+      <CloudCurl className="cloud-two" />
       <div className="gold-dust" />
     </div>
   );
@@ -100,7 +111,7 @@ function App() {
           }
         });
       },
-      { threshold: 0.14, rootMargin: '0px 0px -80px 0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -56px 0px' }
     );
 
     elements.forEach((element) => observer.observe(element));
@@ -132,7 +143,7 @@ function App() {
         <section id="hero" className="hero">
           <div className="hero-copy reveal is-visible">
             <p className="eyebrow">Професійна візитівка</p>
-            <h1>Масажист у клініці з мʼяким, уважним підходом до тіла</h1>
+            <h1>Масажист у клініці з мʼяким, уважним підходом</h1>
             <p className="lead">
               Акуратний масаж, спокійна комунікація та індивідуальний підбір технік.
               Щоб уточнити графік, місто роботи або спосіб запису через клініку — напишіть у зручний месенджер.
@@ -150,10 +161,14 @@ function App() {
           </div>
 
           <div className="hero-visual reveal is-visible">
+            <span className="portrait-dragon-shadow" aria-hidden="true" />
             <DragonSilk className="portrait-curve" />
+            <span className="portrait-whisker portrait-whisker-one" aria-hidden="true" />
+            <span className="portrait-whisker portrait-whisker-two" aria-hidden="true" />
+            <CloudCurl className="portrait-cloud" />
             <div className="portrait-aura" />
             <div className="portrait-frame">
-              <img src="/images/profile.jpg" alt="Фото спеціаліста з масажу" />
+              <img src="/images/profile.webp" alt="Фото спеціаліста з масажу" width="864" height="1536" />
             </div>
             <div className="portrait-note">
               <span>{specialist.role}</span>
@@ -163,6 +178,7 @@ function App() {
         </section>
 
         <section id="about" className="about organic-panel reveal">
+          <span className="panel-dragon-curl" aria-hidden="true" />
           <div className="section-kicker">
             <p className="eyebrow">Про спеціаліста</p>
             <h2>Витончений підхід без зайвої демонстративності</h2>
@@ -180,6 +196,7 @@ function App() {
         </section>
 
         <section id="services" className="section-block reveal">
+          <span className="section-serpent services-serpent" aria-hidden="true" />
           <div className="section-heading">
             <p className="eyebrow">Напрямки роботи</p>
             <h2>Форми роботи з тілом</h2>
@@ -194,9 +211,11 @@ function App() {
               return (
                 <article className="service-card" key={item.title}>
                   <span className="organic-outline" />
-                  <div className="icon-box"><Icon size={22} /></div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
+                  <div className="card-safe-area">
+                    <div className="icon-box"><Icon size={22} /></div>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </div>
                 </article>
               );
             })}
@@ -205,6 +224,7 @@ function App() {
 
         <section className="principles reveal">
           <DragonSilk className="principles-curve" />
+          <CloudCurl className="principles-cloud" />
           <div className="section-heading compact">
             <p className="eyebrow">Підхід</p>
             <h2>Спокій, межі, точність</h2>
@@ -229,6 +249,7 @@ function App() {
           </div>
 
           <div className="clinic-card organic-panel thin">
+            <span className="clinic-dragon" aria-hidden="true" />
             <div className="clinic-row">
               <MapPin size={20} />
               <div>
@@ -254,6 +275,7 @@ function App() {
         </section>
 
         <section id="certificates" className="section-block reveal">
+          <span className="section-serpent cert-serpent" aria-hidden="true" />
           <div className="section-heading">
             <p className="eyebrow">Сертифікати</p>
             <h2>Місце під підтвердження навчання</h2>
@@ -266,9 +288,11 @@ function App() {
             {certificates.map((certificate) => (
               <article className="cert-card" key={certificate}>
                 <span className="organic-outline" />
-                <Award size={30} />
-                <h3>{certificate}</h3>
-                <p>Фото або короткий опис сертифіката</p>
+                <div className="card-safe-area">
+                  <Award size={30} />
+                  <h3>{certificate}</h3>
+                  <p>Фото або короткий опис сертифіката</p>
+                </div>
               </article>
             ))}
           </div>
@@ -276,6 +300,8 @@ function App() {
 
         <section id="contacts" className="contacts reveal">
           <DragonSilk className="contact-curve" />
+          <span className="contact-dragon" aria-hidden="true" />
+          <CloudCurl className="contact-cloud" />
           <div className="contact-copy">
             <p className="eyebrow">Контакти</p>
             <h2>Уточнити доступність</h2>
