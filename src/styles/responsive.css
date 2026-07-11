@@ -1,0 +1,454 @@
+@media (max-width: 1080px) {
+  .page-shell {
+    width: min(calc(100% - 36px), var(--container));
+  }
+
+  .nav {
+    position: fixed;
+    inset: calc(var(--header-height) + 8px) 18px auto;
+    display: grid;
+    justify-items: stretch;
+    gap: 0;
+    padding: 18px;
+    border: 1px solid var(--gold-line);
+    border-radius: 28px;
+    background: rgba(3, 17, 9, 0.97);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 220ms ease, transform 220ms var(--ease), visibility 220ms ease;
+  }
+
+  .nav--open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav a {
+    padding: 13px 12px;
+    border-bottom: 1px solid rgba(215, 189, 85, 0.1);
+    font-size: 0.94rem;
+  }
+
+  .nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .menu-toggle {
+    display: grid;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.8fr);
+    gap: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(4rem, 8.2vw, 6.6rem);
+  }
+
+  .portrait-composition {
+    padding-right: 20px;
+  }
+
+  .certificates__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .certificate-card:nth-child(even) {
+    transform: translateY(20px);
+  }
+
+  .contacts {
+    padding: 52px 44px;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .page-shell {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .topbar {
+    min-height: var(--header-height);
+    gap: 10px;
+  }
+
+  .topbar::before {
+    inset: 6px -6px;
+    border-radius: 24px;
+  }
+
+  .topbar__cta {
+    display: none;
+  }
+
+  .brand__copy small {
+    display: none;
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding: 46px 0 82px;
+  }
+
+  .hero__copy {
+    max-width: none;
+  }
+
+  .hero h1 {
+    margin-bottom: 22px;
+    font-size: clamp(4rem, 15vw, 6.2rem);
+    line-height: 0.83;
+  }
+
+  .hero h1 em {
+    max-width: 620px;
+    margin-top: 12px;
+    font-size: 0.42em;
+    line-height: 1.08;
+  }
+
+  .hero__visual {
+    justify-content: center;
+  }
+
+  .portrait-composition {
+    width: min(100%, 470px);
+    padding: 28px 20px 24px;
+  }
+
+  .portrait-ornament {
+    inset: -4px -42px -14px -42px;
+    width: calc(100% + 84px);
+  }
+
+  .portrait-cloud--top {
+    right: -18px;
+  }
+
+  .portrait-cloud--bottom {
+    left: -20px;
+  }
+
+  .portrait-label {
+    right: 4px;
+    bottom: 46px;
+  }
+
+  .dragon-route {
+    display: none;
+  }
+
+  .section {
+    padding: 86px 0;
+  }
+
+  .about,
+  .clinic,
+  .contacts {
+    grid-template-columns: 1fr;
+  }
+
+  .about {
+    gap: 34px;
+  }
+
+  .about__copy {
+    padding: 34px 30px;
+  }
+
+  .about__copy::before {
+    border-radius: 40px 26px 46px 28px;
+  }
+
+  .about__cloud {
+    width: 210px;
+    bottom: 28px;
+  }
+
+  .services__grid,
+  .principles__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card--2,
+  .service-card--4,
+  .principle-card:nth-child(3),
+  .certificate-card:nth-child(even) {
+    transform: none;
+    margin-left: 0;
+  }
+
+  .service-card,
+  .service-card .organic-card__content {
+    min-height: 0;
+  }
+
+  .organic-card__shape,
+  .organic-card--leaf .organic-card__shape,
+  .organic-card--pebble .organic-card__shape,
+  .organic-card--drop .organic-card__shape,
+  .organic-card--wave .organic-card__shape {
+    border-radius: 34px 22px 36px 24px;
+  }
+
+  .clinic {
+    gap: 36px;
+  }
+
+  .clinic-card .organic-card__content {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 32px 28px;
+  }
+
+  .clinic-item {
+    padding: 0;
+  }
+
+  .clinic-item + .clinic-item {
+    padding-top: 22px;
+    border-top: 1px solid rgba(215, 189, 85, 0.14);
+    border-left: 0;
+  }
+
+  .contacts {
+    margin-top: 94px;
+    padding: 48px 34px;
+  }
+
+  .contacts::before {
+    border-radius: 48px 24px 48px 24px;
+  }
+
+  .contacts__cloud {
+    right: 8%;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .page-shell {
+    width: min(calc(100% - 20px), var(--container));
+  }
+
+  .brand__mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand__copy strong {
+    font-size: 1.18rem;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero {
+    padding-top: 36px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.6rem, 17vw, 5rem);
+  }
+
+  .hero h1 em {
+    font-size: 0.39em;
+  }
+
+  .hero__lead {
+    font-size: 0.98rem;
+  }
+
+  .hero__actions {
+    display: grid;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .hero__meta {
+    display: grid;
+    gap: 9px;
+  }
+
+  .portrait-composition {
+    width: min(100%, 390px);
+    padding: 24px 16px 22px;
+  }
+
+  .portrait-mask {
+    width: 100%;
+    margin: 0;
+  }
+
+  .portrait-ornament {
+    inset: 0 -24px -8px -24px;
+    width: calc(100% + 48px);
+  }
+
+  .portrait-cloud {
+    width: 150px;
+  }
+
+  .portrait-cloud--top {
+    top: 16px;
+    right: -10px;
+  }
+
+  .portrait-cloud--bottom {
+    left: -10px;
+    bottom: 28px;
+  }
+
+  .portrait-label {
+    right: 8px;
+    bottom: 38px;
+    min-width: 122px;
+    padding: 10px 14px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section__heading {
+    margin-bottom: 34px;
+  }
+
+  h2 {
+    font-size: clamp(2.6rem, 13vw, 4rem);
+  }
+
+  .about__copy {
+    padding: 30px 24px;
+  }
+
+  .about__lead {
+    font-size: 1.45rem;
+  }
+
+  .organic-card__content {
+    padding: 26px 22px;
+  }
+
+  .principle-card .organic-card__content {
+    grid-template-columns: auto 1fr;
+    padding: 23px 21px;
+  }
+
+  .certificates__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-card,
+  .certificate-card .organic-card__content {
+    min-height: 220px;
+  }
+
+  .certificate-card h3 {
+    margin-top: 42px;
+  }
+
+  .contacts {
+    padding: 40px 22px;
+  }
+
+  .telegram-card {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 13px 15px;
+  }
+
+  .telegram-card__icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .contacts__meta {
+    display: grid;
+  }
+
+  .contacts__cloud {
+    width: 190px;
+    top: -28px;
+  }
+
+  .site-leaf {
+    width: 180px;
+    opacity: 0.6;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .organic-card:hover .organic-card__shape,
+  .button:hover,
+  .telegram-card:hover,
+  .topbar__cta:hover {
+    transform: none;
+  }
+
+  .portrait-glow,
+  .site-leaf {
+    animation: none;
+  }
+
+  .topbar::before {
+    backdrop-filter: none;
+  }
+}
+
+@media (max-width: 560px) {
+  h2 {
+    font-size: clamp(2.45rem, 11vw, 3.45rem);
+  }
+
+  .portrait-ornament {
+    inset: 0 -8px -6px -8px;
+    width: calc(100% + 16px);
+  }
+
+  .portrait-cloud--top {
+    right: 0;
+  }
+
+  .portrait-cloud--bottom {
+    left: 0;
+  }
+
+  .site-leaf {
+    display: none;
+  }
+
+  .site-background__glow--one {
+    right: -28px;
+  }
+
+  .site-background__glow--two {
+    left: -28px;
+  }
+}
