@@ -370,7 +370,7 @@
 }
 
 .section__heading--narrow {
-  max-width: 650px;
+  max-width: 720px;
 }
 
 .section__heading--compact {
@@ -384,7 +384,7 @@
 
 .about {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: start;
   gap: clamp(46px, 8vw, 110px);
 }
@@ -544,6 +544,14 @@
 .section__heading h2,
 .clinic__intro h2,
 .contacts__copy h2 {
-  overflow-wrap: break-word;
-  hyphens: auto;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* Long Ukrainian headings stay readable without splitting words. */
+.about .section__heading h2 {
+  font-size: clamp(3.15rem, 4.45vw, 5rem);
+  line-height: 0.98;
 }

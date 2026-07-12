@@ -18,7 +18,7 @@ import { DragonRoute, LeafBranch, PortraitOrnament, SectionCloud } from './compo
 
 const specialist = {
   name: 'Катерина',
-  role: 'масажист у клініці DeMassage',
+  role: 'масажист у студії DeMassage',
   city: 'Львів',
   clinic: 'DeMassage',
   schedule: '9:00–20:00',
@@ -125,7 +125,7 @@ function App() {
           <nav className={`nav ${menuOpen ? 'nav--open' : ''}`} aria-label="Основна навігація">
             <a href="#about" onClick={closeMenu}>Про Катерину</a>
             <a href="#services" onClick={closeMenu}>Напрямки</a>
-            <a href="#clinic" onClick={closeMenu}>Клініка</a>
+            <a href="#clinic" onClick={closeMenu}>Студія</a>
             <a href="#certificates" onClick={closeMenu}>Сертифікати</a>
             <a href="#contacts" onClick={closeMenu}>Контакти</a>
           </nav>
@@ -190,7 +190,7 @@ function App() {
                     />
                     <img
                       src="/images/profile-720.webp"
-                      alt="Катерина, масажист у клініці DeMassage"
+                      alt="Катерина, масажист у студії DeMassage"
                       width="720"
                       height="1280"
                       fetchPriority="high"
@@ -212,7 +212,7 @@ function App() {
             </div>
             <div className="about__copy">
               <p className="about__lead">
-                Катерина працює у клініці DeMassage у Львові та допомагає клієнтам зменшувати тілесну напругу, відновлюватися після навантаження й уважніше відчувати власне тіло.
+                Катерина працює у студії DeMassage у Львові та допомагає клієнтам зменшувати тілесну напругу, відновлюватися після навантаження й уважніше відчувати власне тіло.
               </p>
               <p>
                 У роботі поєднує мʼяку комунікацію, повагу до меж і добір технік відповідно до актуального стану клієнта. Актуальний графік і можливість запису можна уточнити через Telegram.
@@ -258,8 +258,8 @@ function App() {
           <section id="clinic" className="section clinic" data-reveal>
             <div className="clinic__intro">
               <p className="eyebrow">Місце роботи</p>
-              <h2>Прийом у DeMassage</h2>
-              <p>Катерина працює у клініці у Львові. Актуальну доступність краще уточнювати перед візитом.</p>
+              <h2>Прийом у студії DeMassage</h2>
+              <p>Катерина працює у студії DeMassage у Львові. Актуальну доступність краще уточнювати перед візитом.</p>
             </div>
 
             <OrganicCard className="clinic-card" shape="wave" as="div">
@@ -270,7 +270,7 @@ function App() {
               </div>
               <div className="clinic-item">
                 <HeartHandshake size={21} />
-                <span>Клініка</span>
+                <span>Студія</span>
                 <strong>{specialist.clinic}</strong>
               </div>
               <div className="clinic-item">
@@ -305,7 +305,7 @@ function App() {
               <p className="eyebrow">Контакти</p>
               <h2>Уточнити доступність</h2>
               <p>
-                Напиши Катерині в Telegram, щоб уточнити актуальний графік, доступність і спосіб запису через клініку.
+                Напиши Катерині в Telegram, щоб уточнити актуальний графік, доступність і спосіб запису через студію.
               </p>
             </div>
 
