@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   Award,
+  Camera,
   CalendarDays,
   ChevronRight,
   HeartHandshake,
@@ -24,6 +25,13 @@ const specialist = {
   schedule: '9:00–20:00',
   telegramUrl: 'https://t.me/katiya06',
   telegramLabel: '@katiya06'
+};
+
+const bookingContacts = {
+  telegramUrl: 'https://t.me/de_massage_stryiska',
+  telegramLabel: '@de_massage_stryiska',
+  instagramUrl: 'https://www.instagram.com/de_massage_spa?igsh=dHI4M2E3Z3lidWhp&igsi=dHI4M2E3Z3lidWhp',
+  instagramLabel: '@de_massage_spa'
 };
 
 const services = [
@@ -60,7 +68,26 @@ const principles = [
   'Прозоре уточнення графіка й доступності через Telegram'
 ];
 
-const certificates = ['Сертифікат 1', 'Сертифікат 2', 'Сертифікат 3', 'Сертифікат 4'];
+const certificates = [
+  {
+    title: 'Тайський масаж з елементами йоги',
+    details: 'Майстер-клас · 19 червня 2026',
+    image: '/images/certificates/thai-massage-yoga.jpg',
+    alt: 'Сертифікат Катерини Свідрак про проходження майстер-класу з тайського масажу з елементами йоги'
+  },
+  {
+    title: 'Базовий курс масажу та Body Blade',
+    details: 'Курс і майстер-клас · 10 квітня 2026',
+    image: '/images/certificates/massage-body-blade.jpg',
+    alt: 'Сертифікат Катерини Свідрак про завершення базового курсу масажу та майстер-класу Body Blade'
+  },
+  {
+    title: 'Фаховий молодший бакалавр',
+    details: 'Спеціальність «Медсестринство» · 2025',
+    image: '/images/certificates/nursing-diploma.jpg',
+    alt: 'Диплом Катерини Свідрак за спеціальністю Медсестринство'
+  }
+];
 
 function useReveal() {
   useEffect(() => {
@@ -115,7 +142,6 @@ function App() {
 
         <header className="topbar">
           <a className="brand" href="#hero" onClick={closeMenu} aria-label="На початок сторінки">
-            <span className="brand__mark" aria-hidden="true">К</span>
             <span className="brand__copy">
               <strong>{specialist.name}</strong>
               <small>{specialist.role}</small>
@@ -126,12 +152,13 @@ function App() {
             <a href="#about" onClick={closeMenu}>Про Катерину</a>
             <a href="#services" onClick={closeMenu}>Напрямки</a>
             <a href="#clinic" onClick={closeMenu}>Студія</a>
+            <a href="#booking" onClick={closeMenu}>Запис</a>
             <a href="#certificates" onClick={closeMenu}>Сертифікати</a>
             <a href="#contacts" onClick={closeMenu}>Контакти</a>
           </nav>
 
           <a className="topbar__cta" href={specialist.telegramUrl} target="_blank" rel="noreferrer">
-            Написати
+            Написати мені
           </a>
 
           <button
@@ -281,19 +308,74 @@ function App() {
             </OrganicCard>
           </section>
 
+          <section id="booking" className="section booking" data-reveal>
+            <div className="booking__intro">
+              <p className="eyebrow">Запис</p>
+              <h2>Записатися у DeMassage</h2>
+              <p>
+                Щоб обрати зручний час і записатися на сеанс, зверніться до адміністрації студії у Telegram або Instagram.
+              </p>
+            </div>
+
+            <OrganicCard className="booking-card" shape="pebble" as="div">
+              <div className="booking__links">
+                <a
+                  className="booking-link"
+                  href={bookingContacts.telegramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="booking-link__icon"><MessageCircle size={24} /></span>
+                  <span className="booking-link__copy">
+                    <small>Telegram студії</small>
+                    <strong>{bookingContacts.telegramLabel}</strong>
+                  </span>
+                  <ChevronRight size={20} />
+                </a>
+
+                <a
+                  className="booking-link"
+                  href={bookingContacts.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span className="booking-link__icon"><Camera size={24} /></span>
+                  <span className="booking-link__copy">
+                    <small>Instagram студії</small>
+                    <strong>{bookingContacts.instagramLabel}</strong>
+                  </span>
+                  <ChevronRight size={20} />
+                </a>
+              </div>
+            </OrganicCard>
+          </section>
+
           <section id="certificates" className="section certificates" data-reveal>
             <div className="section__heading">
               <p className="eyebrow">Сертифікати</p>
               <h2>Підтвердження навчання</h2>
-              <p>Місця під реальні фото сертифікатів. Їх можна додати без зміни структури сторінки.</p>
+              <p>Професійна освіта та додаткове навчання у різних напрямках масажу.</p>
             </div>
 
             <div className="certificates__grid">
-              {certificates.map((certificate, index) => (
-                <OrganicCard key={certificate} shape={index % 2 ? 'drop' : 'leaf'} className="certificate-card">
-                  <Award size={28} />
-                  <h3>{certificate}</h3>
-                  <p>Фото або короткий опис навчання</p>
+              {certificates.map(({ title, details, image, alt }, index) => (
+                <OrganicCard key={title} shape={index % 2 ? 'drop' : 'leaf'} className="certificate-card">
+                  <a
+                    className="certificate-card__media"
+                    href={image}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Відкрити документ: ${title}`}
+                  >
+                    <img src={image} alt={alt} loading="lazy" />
+                  </a>
+                  <div className="certificate-card__copy">
+                    <Award size={24} aria-hidden="true" />
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{details}</p>
+                    </div>
+                  </div>
                 </OrganicCard>
               ))}
             </div>
