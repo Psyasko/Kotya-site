@@ -84,7 +84,7 @@
   top: 0;
   min-height: var(--header-height);
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 30px;
   padding: 12px 0;
@@ -158,27 +158,6 @@
   right: 0;
 }
 
-.topbar__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  padding: 0 18px;
-  border: 1px solid var(--gold-line-strong);
-  border-radius: 999px;
-  color: var(--gold-pale);
-  font-size: 0.82rem;
-  font-weight: 700;
-  background: rgba(20, 79, 7, 0.18);
-  transition: border-color 220ms ease, background 220ms ease, transform 220ms ease;
-}
-
-.topbar__cta:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 230, 0, 0.66);
-  background: rgba(20, 79, 7, 0.34);
-}
-
 .menu-toggle {
   display: none;
   width: 44px;
@@ -243,8 +222,7 @@
   gap: 10px 18px;
 }
 
-.hero__meta span,
-.contacts__meta span {
+.hero__meta span {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -252,8 +230,7 @@
   font-size: 0.83rem;
 }
 
-.hero__meta svg,
-.contacts__meta svg {
+.hero__meta svg {
   color: var(--mint);
 }
 
@@ -389,37 +366,14 @@
 
 .about {
   display: grid;
-  grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.38fr);
-  align-items: start;
+  grid-template-columns: minmax(250px, 0.58fr) minmax(0, 1.42fr);
+  align-items: center;
   gap: clamp(42px, 6vw, 86px);
 }
 
-.about__copy {
-  position: relative;
-  max-width: 860px;
-  padding: clamp(54px, 5vw, 76px) clamp(58px, 5.6vw, 88px);
-}
-
-.about__copy::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border: 1px solid var(--gold-line);
-  border-radius: 34% 66% 50% 50% / 22% 38% 62% 78%;
-  background: linear-gradient(145deg, rgba(9, 40, 22, 0.68), rgba(4, 21, 11, 0.88));
-  box-shadow: var(--shadow-soft);
-}
-
-.about__lead {
-  color: var(--text);
-  font-family: var(--font-display);
-  font-size: clamp(1.14rem, 1.65vw, 1.42rem);
-  line-height: 1.42;
-}
-
-.about__copy p:last-child {
-  margin-bottom: 0;
+.about__cards {
+  display: grid;
+  gap: clamp(20px, 2.5vw, 30px);
 }
 
 .about__cloud {
@@ -476,62 +430,12 @@
   gap: 24px;
 }
 
+.certificates {
+  padding-bottom: clamp(104px, 12vw, 170px);
+}
+
 .certificate-card:nth-child(even) {
   transform: translateY(28px);
-}
-
-.contacts {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(36px, 8vw, 110px);
-  align-items: center;
-  margin: clamp(90px, 12vw, 170px) 0 70px;
-  padding: clamp(64px, 8vw, 104px) clamp(72px, 8.5vw, 112px);
-}
-
-.contacts::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border: 1px solid rgba(215, 189, 85, 0.36);
-  border-radius: 104px 230px 126px 188px / 92px 118px 164px 142px;
-  background:
-    linear-gradient(135deg, rgba(20, 79, 7, 0.2), transparent 42%),
-    rgba(4, 21, 11, 0.92);
-  box-shadow: var(--shadow);
-}
-
-.contacts h2 {
-  max-width: 620px;
-  margin-bottom: 18px;
-  font-size: clamp(3rem, 4.7vw, 4.9rem);
-}
-
-.contacts__copy p:last-child {
-  max-width: 570px;
-  margin-bottom: 0;
-}
-
-.contacts__action {
-  display: grid;
-  gap: 18px;
-}
-
-.contacts__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-}
-
-.contacts__cloud {
-  position: absolute;
-  z-index: 0;
-  width: 290px;
-  right: 6%;
-  top: -42px;
-  color: rgba(215, 189, 85, 0.24);
 }
 
 .footer {
@@ -550,19 +454,16 @@
 }
 
 .section__heading,
-.about__copy,
+.about__cards,
 .clinic__intro,
 .booking__intro,
-.contacts__copy,
-.contacts__action,
 .hero__copy,
 .hero__ornament {
   min-width: 0;
 }
 
 .section__heading h2,
-.clinic__intro h2,
-.contacts__copy h2 {
+.clinic__intro h2 {
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;

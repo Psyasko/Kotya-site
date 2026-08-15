@@ -9,6 +9,12 @@
   transform: translateY(0);
 }
 
+/* Section anchors remain geometrically stable while their content fades in. */
+.section[data-reveal],
+.section[data-reveal].is-visible {
+  transform: none;
+}
+
 [data-reveal].is-visible .portrait-ornament__main,
 [data-reveal].is-visible ~ * .portrait-ornament__main {
   animation: draw-line 1.7s 180ms var(--ease) forwards;

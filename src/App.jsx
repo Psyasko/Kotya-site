@@ -11,23 +11,23 @@ import {
   Footprints,
   Hand,
   HeartHandshake,
+  ExternalLink,
   MapPin,
   Menu,
   MessageCircle,
   X
 } from 'lucide-react';
 import OrganicCard from './components/OrganicCard';
-import { DragonRoute, LeafBranch, PortraitOrnament, SectionCloud } from './components/Decor';
+import { DragonRoute, LeafBranch, PortraitOrnament, SectionCloud, StudioDivider } from './components/Decor';
 
 const specialist = {
   name: 'Катерина',
-  role: 'майстер масажу у DeMassage',
+  role: 'майстриня масажу у DeMassage',
   city: 'Львів',
   studio: 'DeMassage',
   address: 'вул. Стрийська, 108',
   schedule: '9:00–20:00',
-  telegramUrl: 'https://t.me/katiya06',
-  telegramLabel: '@katiya06'
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=DeMassage%2C%20%D0%B2%D1%83%D0%BB.%20%D0%A1%D1%82%D1%80%D0%B8%D0%B9%D1%81%D1%8C%D0%BA%D0%B0%20108%2C%20%D0%9B%D1%8C%D0%B2%D1%96%D0%B2'
 };
 
 const bookingContacts = {
@@ -156,12 +156,7 @@ function App() {
             <a href="#clinic" onClick={closeMenu}>Студія</a>
             <a href="#booking" onClick={closeMenu}>Запис</a>
             <a href="#certificates" onClick={closeMenu}>Сертифікати</a>
-            <a href="#contacts" onClick={closeMenu}>Контакти</a>
           </nav>
-
-          <a className="topbar__cta" href={specialist.telegramUrl} target="_blank" rel="noreferrer">
-            Написати мені
-          </a>
 
           <button
             className="menu-toggle"
@@ -184,9 +179,9 @@ function App() {
               </h1>
 
               <div className="hero__actions">
-                <a className="button button--primary" href={specialist.telegramUrl} target="_blank" rel="noreferrer">
+                <a className="button button--primary" href="#booking">
                   <MessageCircle size={19} />
-                  Уточнити доступність
+                  Записатися у студії
                 </a>
                 <a className="button button--ghost" href="#services">
                   Напрямки роботи
@@ -213,27 +208,30 @@ function App() {
             </div>
           </section>
 
-          <section id="about" className="about section" data-reveal>
-            <div className="section__heading section__heading--narrow">
+          <section className="about section" data-reveal>
+            <div id="about" className="section__heading section__heading--narrow anchor-target">
               <p className="eyebrow">Про Катерину</p>
               <h2>Медична освіта й уважна практика</h2>
             </div>
-            <div className="about__copy">
-              <p className="about__lead">
-                В основі практики майстині масажу лежить професійна медична освіта, що дає глибоке розуміння анатомії, фізіології та біомеханіки людини. Це гарантує, що кожний рух буде не лише приємним, а й абсолютно безпечним для вашого хребта та м'язів. Працює не за шаблонами, тому застосовується виключно індивідуальний підхід: перед кожним сеансом обговорюється ваш стан та самопочуття, щоб підібрати саме ті техніки, які потрібні вашому тілу прямо зараз.
-              </p>
-              <p>
-                Завдяки володінню різними методиками може працювати з будь-якою інтенсивністю. Це може бути як делікатний релакс-масаж для зняття стресу, так і глибоке, сильне опрацювання тригерних точок та затисків. Під час сеансу ви отримаєте не лише якісний масаж, а й турботу про ваш максимальний комфорт, оскільки в студії затишна атмосфера із приємною музикою, якісними гіпоалергенними оліями та комфортною температурою.
-              </p>
-              <p>
-                Дозвольте своєму тілу відпочити та відновитися. Записуйтесь на сеанс, і ми разом підберемо ідеальний догляд для вашого здоров'я та гарного самопочуття!
-              </p>
+            <div className="about__cards">
+              <OrganicCard className="about-card about-card--medical" shape="leaf">
+                <h3>Медична основа</h3>
+                <p>
+                  В основі практики — професійна медична освіта та розуміння анатомії, фізіології й біомеханіки. Перед кожним сеансом Катерина уточнює стан і самопочуття клієнта та підбирає техніки відповідно до актуальних потреб тіла.
+                </p>
+              </OrganicCard>
+              <OrganicCard className="about-card about-card--individual" shape="drop">
+                <h3>Індивідуальна робота</h3>
+                <p>
+                  Катерина володіє техніками різної інтенсивності — від делікатного релакс-масажу до глибшого опрацювання м’язів, тригерних точок і затисків. У студії особлива увага приділяється комфорту: затишній атмосфері, приємній музиці, гіпоалергенним оліям і комфортній температурі.
+                </p>
+              </OrganicCard>
             </div>
             <SectionCloud className="about__cloud" />
           </section>
 
-          <section id="services" className="section services" data-reveal>
-            <div className="section__heading">
+          <section className="section services" data-reveal>
+            <div id="services" className="section__heading anchor-target">
               <p className="eyebrow">Напрямки роботи</p>
               <h2>Форми роботи з тілом</h2>
               <p>Кожен формат підбирається під стан, рівень напруги та потребу у відновленні.</p>
@@ -252,14 +250,15 @@ function App() {
             </div>
           </section>
 
-          <section id="clinic" className="section clinic" data-reveal>
-            <div className="clinic__intro">
+          <section className="section clinic" data-reveal>
+            <div id="clinic" className="clinic__intro anchor-target">
               <p className="eyebrow">Місце роботи</p>
               <h2>Прийом у студії DeMassage</h2>
               <p>Катерина працює у студії DeMassage у Львові. Актуальну доступність краще уточнювати перед візитом.</p>
             </div>
 
             <OrganicCard className="clinic-card" shape="wave" as="div">
+              <StudioDivider />
               <div className="clinic-item">
                 <MapPin size={21} />
                 <span>Місто</span>
@@ -273,7 +272,16 @@ function App() {
               <div className="clinic-item">
                 <MapPin size={21} />
                 <span>Адреса</span>
-                <strong>{specialist.address}</strong>
+                <a
+                  className="clinic-address"
+                  href={specialist.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Відкрити адресу DeMassage у Google Maps"
+                >
+                  <strong>{specialist.address}</strong>
+                  <ExternalLink size={15} aria-hidden="true" />
+                </a>
               </div>
               <div className="clinic-item">
                 <CalendarDays size={21} />
@@ -283,8 +291,8 @@ function App() {
             </OrganicCard>
           </section>
 
-          <section id="booking" className="section booking" data-reveal>
-            <div className="booking__intro">
+          <section className="section booking" data-reveal>
+            <div id="booking" className="booking__intro anchor-target">
               <p className="eyebrow">Запис</p>
               <h2>Записатися у DeMassage</h2>
               <p>
@@ -325,8 +333,8 @@ function App() {
             </OrganicCard>
           </section>
 
-          <section id="certificates" className="section certificates" data-reveal>
-            <div className="section__heading">
+          <section className="section certificates" data-reveal>
+            <div id="certificates" className="section__heading anchor-target">
               <p className="eyebrow">Сертифікати</p>
               <h2>Підтвердження навчання</h2>
               <p>Професійна освіта та додаткове навчання у різних напрямках масажу.</p>
@@ -356,33 +364,6 @@ function App() {
             </div>
           </section>
 
-          <section id="contacts" className="contacts" data-reveal>
-            <SectionCloud className="contacts__cloud" />
-            <div className="contacts__copy">
-              <p className="eyebrow">Контакти</p>
-              <h2>Уточнити доступність</h2>
-              <p>
-                Напиши Катерині в Telegram, щоб уточнити актуальний графік, доступність і спосіб запису через студію.
-              </p>
-            </div>
-
-            <div className="contacts__action">
-              <a className="telegram-card" href={specialist.telegramUrl} target="_blank" rel="noreferrer">
-                <span className="telegram-card__icon"><MessageCircle size={25} /></span>
-                <span>
-                  <small>Telegram</small>
-                  <strong>{specialist.telegramLabel}</strong>
-                </span>
-                <ChevronRight size={20} />
-              </a>
-              <div className="contacts__meta">
-                <span><MapPin size={16} /> {specialist.city}</span>
-                <span><HeartHandshake size={16} /> {specialist.studio}</span>
-                <span><MapPin size={16} /> {specialist.address}</span>
-                <span><CalendarDays size={16} /> {specialist.schedule}</span>
-              </div>
-            </div>
-          </section>
         </main>
 
         <footer className="footer">
