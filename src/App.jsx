@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import {
+  Activity,
   Award,
   Camera,
   CalendarDays,
   ChevronRight,
+  Droplets,
+  Dumbbell,
+  Flower2,
+  Footprints,
+  Hand,
   HeartHandshake,
-  Leaf,
   MapPin,
   Menu,
   MessageCircle,
-  ShieldCheck,
-  Sparkles,
-  Waves,
   X
 } from 'lucide-react';
 import OrganicCard from './components/OrganicCard';
@@ -19,9 +21,10 @@ import { DragonRoute, LeafBranch, PortraitOrnament, SectionCloud } from './compo
 
 const specialist = {
   name: 'Катерина',
-  role: 'масажист у студії DeMassage',
+  role: 'майстер масажу у DeMassage',
   city: 'Львів',
-  clinic: 'DeMassage',
+  studio: 'DeMassage',
+  address: 'вул. Стрийська, 108',
   schedule: '9:00–20:00',
   telegramUrl: 'https://t.me/katiya06',
   telegramLabel: '@katiya06'
@@ -36,36 +39,35 @@ const bookingContacts = {
 
 const services = [
   {
-    title: 'Класичний масаж',
-    text: 'Робота з мʼязовою напругою, втомою та загальним відновленням тіла.',
-    icon: Waves,
+    title: 'Авторський масаж студії DeMassage',
+    icon: Hand,
     shape: 'leaf'
   },
   {
-    title: 'Спина та шия',
-    text: 'Увага до зон, де часто накопичується напруга через стрес або тривале навантаження.',
-    icon: Sparkles,
+    title: 'Масаж спини',
+    icon: Activity,
     shape: 'pebble'
   },
   {
-    title: 'Релакс-масаж',
-    text: 'Мʼякий темп, спокійна атмосфера та відновлення контакту з тілом.',
-    icon: HeartHandshake,
+    title: 'Спортивний масаж',
+    icon: Dumbbell,
     shape: 'drop'
   },
   {
-    title: 'Відновлювальний масаж',
-    text: 'Індивідуальний підбір технік відповідно до актуального стану й рівня навантаження.',
-    icon: ShieldCheck,
+    title: 'Антицелюлітний масаж',
+    icon: Droplets,
     shape: 'wave'
+  },
+  {
+    title: 'Тайський масаж',
+    icon: Footprints,
+    shape: 'leaf'
+  },
+  {
+    title: 'SPA-послуги',
+    icon: Flower2,
+    shape: 'pebble'
   }
-];
-
-const principles = [
-  'Індивідуальний підбір технік під актуальний стан тіла',
-  'Акуратна робота без агресивного тиску та перебільшених обіцянок',
-  'Повага до комфорту, особистих меж і темпу клієнта',
-  'Прозоре уточнення графіка й доступності через Telegram'
 ];
 
 const certificates = [
@@ -175,14 +177,11 @@ function App() {
         <main>
           <section id="hero" className="hero" data-reveal>
             <div className="hero__copy">
-              <p className="eyebrow">Професійна візитівка</p>
+              <p className="eyebrow">Тиша · увага · відновлення</p>
               <h1>
                 <span>{specialist.name}</span>
-                <em>{specialist.role}</em>
+                <em>— {specialist.role}</em>
               </h1>
-              <p className="hero__lead">
-                Уважний масаж, спокійна комунікація та індивідуальний підбір технік відповідно до стану тіла.
-              </p>
 
               <div className="hero__actions">
                 <a className="button button--primary" href={specialist.telegramUrl} target="_blank" rel="noreferrer">
@@ -197,37 +196,19 @@ function App() {
 
               <div className="hero__meta" aria-label="Коротка інформація">
                 <span><MapPin size={16} /> {specialist.city}</span>
-                <span><CalendarDays size={16} /> {specialist.schedule}</span>
-                <span><HeartHandshake size={16} /> {specialist.clinic}</span>
+                <span><HeartHandshake size={16} /> {specialist.studio}</span>
+                <span><MapPin size={16} /> {specialist.address}</span>
               </div>
             </div>
 
-            <div className="hero__visual">
-              <div className="portrait-composition">
-                <PortraitOrnament />
-                <SectionCloud className="portrait-cloud portrait-cloud--top" />
-                <SectionCloud className="portrait-cloud portrait-cloud--bottom" />
-                <div className="portrait-glow" aria-hidden="true" />
-                <div className="portrait-mask">
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet="/images/profile-480.webp 480w, /images/profile-720.webp 720w, /images/profile-960.webp 960w"
-                      sizes="(max-width: 720px) 82vw, (max-width: 1100px) 46vw, 430px"
-                    />
-                    <img
-                      src="/images/profile-720.webp"
-                      alt="Катерина, масажист у студії DeMassage"
-                      width="720"
-                      height="1280"
-                      fetchPriority="high"
-                    />
-                  </picture>
-                </div>
-                <div className="portrait-label">
-                  <small>{specialist.clinic}</small>
-                  <strong>{specialist.city}</strong>
-                </div>
+            <div className="hero__ornament" aria-hidden="true">
+              <PortraitOrnament />
+              <SectionCloud className="hero__cloud hero__cloud--top" />
+              <SectionCloud className="hero__cloud hero__cloud--bottom" />
+              <LeafBranch className="hero__leaf-branch" />
+              <div className="hero__seal">
+                <span>{specialist.studio}</span>
+                <strong>{specialist.city}</strong>
               </div>
             </div>
           </section>
@@ -235,14 +216,17 @@ function App() {
           <section id="about" className="about section" data-reveal>
             <div className="section__heading section__heading--narrow">
               <p className="eyebrow">Про Катерину</p>
-              <h2>Професійний підхід без зайвої демонстративності</h2>
+              <h2>Медична освіта й уважна практика</h2>
             </div>
             <div className="about__copy">
               <p className="about__lead">
-                Катерина працює у студії DeMassage у Львові та допомагає клієнтам зменшувати тілесну напругу, відновлюватися після навантаження й уважніше відчувати власне тіло.
+                В основі практики майстині масажу лежить професійна медична освіта, що дає глибоке розуміння анатомії, фізіології та біомеханіки людини. Це гарантує, що кожний рух буде не лише приємним, а й абсолютно безпечним для вашого хребта та м'язів. Працює не за шаблонами, тому застосовується виключно індивідуальний підхід: перед кожним сеансом обговорюється ваш стан та самопочуття, щоб підібрати саме ті техніки, які потрібні вашому тілу прямо зараз.
               </p>
               <p>
-                У роботі поєднує мʼяку комунікацію, повагу до меж і добір технік відповідно до актуального стану клієнта. Актуальний графік і можливість запису можна уточнити через Telegram.
+                Завдяки володінню різними методиками може працювати з будь-якою інтенсивністю. Це може бути як делікатний релакс-масаж для зняття стресу, так і глибоке, сильне опрацювання тригерних точок та затисків. Під час сеансу ви отримаєте не лише якісний масаж, а й турботу про ваш максимальний комфорт, оскільки в студії затишна атмосфера із приємною музикою, якісними гіпоалергенними оліями та комфортною температурою.
+              </p>
+              <p>
+                Дозвольте своєму тілу відпочити та відновитися. Записуйтесь на сеанс, і ми разом підберемо ідеальний догляд для вашого здоров'я та гарного самопочуття!
               </p>
             </div>
             <SectionCloud className="about__cloud" />
@@ -256,27 +240,13 @@ function App() {
             </div>
 
             <div className="services__grid">
-              {services.map(({ title, text, icon: Icon, shape }, index) => (
+              {services.map(({ title, icon: Icon, shape }, index) => (
                 <OrganicCard key={title} shape={shape} className={`service-card service-card--${index + 1}`}>
-                  <span className="card-icon"><Icon size={22} /></span>
+                  <div className="service-card__topline">
+                    <span className="card-icon"><Icon size={22} /></span>
+                    <span className="service-card__number">0{index + 1}</span>
+                  </div>
                   <h3>{title}</h3>
-                  <p>{text}</p>
-                </OrganicCard>
-              ))}
-            </div>
-          </section>
-
-          <section className="section principles" data-reveal>
-            <div className="section__heading section__heading--compact">
-              <p className="eyebrow">Підхід</p>
-              <h2>Спокій, межі, точність</h2>
-            </div>
-
-            <div className="principles__grid">
-              {principles.map((item, index) => (
-                <OrganicCard key={item} shape={index % 2 ? 'wave' : 'pebble'} className="principle-card" as="div">
-                  <Leaf size={19} />
-                  <p>{item}</p>
                 </OrganicCard>
               ))}
             </div>
@@ -298,7 +268,12 @@ function App() {
               <div className="clinic-item">
                 <HeartHandshake size={21} />
                 <span>Студія</span>
-                <strong>{specialist.clinic}</strong>
+                <strong>{specialist.studio}</strong>
+              </div>
+              <div className="clinic-item">
+                <MapPin size={21} />
+                <span>Адреса</span>
+                <strong>{specialist.address}</strong>
               </div>
               <div className="clinic-item">
                 <CalendarDays size={21} />
@@ -402,7 +377,8 @@ function App() {
               </a>
               <div className="contacts__meta">
                 <span><MapPin size={16} /> {specialist.city}</span>
-                <span><HeartHandshake size={16} /> {specialist.clinic}</span>
+                <span><HeartHandshake size={16} /> {specialist.studio}</span>
+                <span><MapPin size={16} /> {specialist.address}</span>
                 <span><CalendarDays size={16} /> {specialist.schedule}</span>
               </div>
             </div>
@@ -410,7 +386,7 @@ function App() {
         </main>
 
         <footer className="footer">
-          <p>© {new Date().getFullYear()} {specialist.name}. Професійна візитівка масажиста.</p>
+          <p>© {new Date().getFullYear()} {specialist.name}. Професійна візитівка майстрині масажу.</p>
           <p>Масаж не замінює консультацію лікаря за наявності медичних показань.</p>
         </footer>
       </div>

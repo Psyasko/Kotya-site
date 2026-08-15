@@ -45,7 +45,7 @@
   }
 
   .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.8fr);
+    grid-template-columns: minmax(0, 1fr) minmax(290px, 0.62fr);
     gap: 28px;
   }
 
@@ -53,8 +53,8 @@
     font-size: clamp(4rem, 8.2vw, 6.6rem);
   }
 
-  .portrait-composition {
-    padding-right: 20px;
+  .hero__ornament {
+    min-height: 460px;
   }
 
   .certificates__grid {
@@ -122,31 +122,24 @@
     line-height: 1.08;
   }
 
-  .hero__visual {
-    justify-content: center;
+  .hero__ornament {
+    width: min(100%, 500px);
+    min-height: 430px;
+    justify-self: center;
   }
 
-  .portrait-composition {
-    width: min(100%, 470px);
-    padding: 28px 20px 24px;
+  .hero__ornament .portrait-ornament {
+    inset: -2% -12% -5% -12%;
+    width: 124%;
+    height: 107%;
   }
 
-  .portrait-ornament {
-    inset: -4px -42px -14px -42px;
-    width: calc(100% + 84px);
+  .hero__cloud--top {
+    right: -3%;
   }
 
-  .portrait-cloud--top {
-    right: -18px;
-  }
-
-  .portrait-cloud--bottom {
-    left: -20px;
-  }
-
-  .portrait-label {
-    right: 4px;
-    bottom: 46px;
+  .hero__cloud--bottom {
+    left: -3%;
   }
 
   .dragon-route {
@@ -169,11 +162,12 @@
   }
 
   .about__copy {
-    padding: 42px 38px;
+    max-width: none;
+    padding: 48px max(42px, 8%);
   }
 
   .about__copy::before {
-    border-radius: 40px 26px 46px 28px;
+    border-radius: 72px 38px 88px 46px / 52px 76px 44px 68px;
   }
 
   .about__cloud {
@@ -181,14 +175,13 @@
     bottom: 28px;
   }
 
-  .services__grid,
-  .principles__grid {
+  .services__grid {
     grid-template-columns: 1fr;
   }
 
   .service-card--2,
   .service-card--4,
-  .principle-card:nth-child(3),
+  .service-card--6,
   .certificate-card:nth-child(even) {
     transform: none;
     margin-left: 0;
@@ -196,7 +189,7 @@
 
   .service-card,
   .service-card .organic-card__content {
-    min-height: 0;
+    min-height: 210px;
   }
 
   .service-card .organic-card__content {
@@ -245,13 +238,17 @@
     border-left: 0;
   }
 
+  .clinic-item:nth-child(n + 3) {
+    margin-top: 0;
+  }
+
   .contacts {
     margin-top: 94px;
     padding: 48px 34px;
   }
 
   .contacts::before {
-    border-radius: 48px 24px 48px 24px;
+    border-radius: 86px 38px 72px 46px / 54px 78px 46px 68px;
   }
 
   .contacts__cloud {
@@ -291,11 +288,8 @@
   }
 
   .hero h1 em {
-    font-size: 0.39em;
-  }
-
-  .hero__lead {
-    font-size: 0.98rem;
+    font-size: 0.36em;
+    line-height: 1.12;
   }
 
   .hero__actions {
@@ -311,40 +305,34 @@
     gap: 9px;
   }
 
-  .portrait-composition {
-    width: min(100%, 390px);
-    padding: 24px 16px 22px;
+  .hero__ornament {
+    width: min(96%, 390px);
+    min-height: 350px;
+    overflow: hidden;
+    border-radius: 58% 42% 52% 48% / 44% 58% 42% 56%;
   }
 
-  .portrait-mask {
-    width: 100%;
-    margin: 0;
-  }
-
-  .portrait-ornament {
-    inset: 0 -24px -8px -24px;
-    width: calc(100% + 48px);
-  }
-
-  .portrait-cloud {
+  .hero__cloud {
     width: 150px;
   }
 
-  .portrait-cloud--top {
-    top: 16px;
-    right: -10px;
+  .hero__cloud--top {
+    top: 4px;
+    right: 0;
   }
 
-  .portrait-cloud--bottom {
-    left: -10px;
-    bottom: 28px;
+  .hero__cloud--bottom {
+    left: 0;
+    bottom: 4px;
   }
 
-  .portrait-label {
-    right: 8px;
-    bottom: 38px;
-    min-width: 122px;
-    padding: 10px 14px;
+  .hero__seal {
+    width: 118px;
+  }
+
+  .hero__leaf-branch {
+    right: 4%;
+    width: 150px;
   }
 
   .section {
@@ -360,11 +348,12 @@
   }
 
   .about__copy {
-    padding: 30px 24px;
+    padding: 42px 28px;
   }
 
   .about__lead {
-    font-size: 1.45rem;
+    font-size: 1.1rem;
+    line-height: 1.48;
   }
 
   .organic-card__content {
@@ -372,14 +361,8 @@
   }
 
   .service-card .organic-card__content {
-    padding: 34px max(30px, 8%);
-  }
-
-  .principle-card .organic-card__content {
-    display: flex;
-    justify-content: center;
-    padding: 30px max(30px, 8%);
-    text-align: center;
+    min-height: 192px;
+    padding: 36px max(32px, 9%);
   }
 
   .certificates__grid {
@@ -410,13 +393,22 @@
   }
 
   .booking-link {
-    gap: 12px;
-    padding: 12px 14px;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+    padding: 12px;
   }
 
   .booking-link__icon {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .booking-link strong {
+    font-size: clamp(0.72rem, 3.4vw, 0.9rem);
+  }
+
+  .booking-link > svg {
+    display: none;
   }
 
   .contacts__meta {
@@ -457,16 +449,17 @@
     font-size: clamp(2.45rem, 11vw, 3.45rem);
   }
 
-  .portrait-ornament {
-    inset: 0 -8px -6px -8px;
-    width: calc(100% + 16px);
+  .hero__ornament .portrait-ornament {
+    inset: 0 -5% -4% -5%;
+    width: 110%;
+    height: 104%;
   }
 
-  .portrait-cloud--top {
+  .hero__cloud--top {
     right: 0;
   }
 
-  .portrait-cloud--bottom {
+  .hero__cloud--bottom {
     left: 0;
   }
 

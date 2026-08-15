@@ -100,20 +100,27 @@
 }
 
 .service-card {
-  min-height: 264px;
+  min-height: 236px;
 }
 
 .service-card .organic-card__content {
   display: grid;
-  align-content: start;
-  min-height: 264px;
-  padding: clamp(46px, 5vw, 62px) max(clamp(58px, 6vw, 78px), 11%);
+  align-content: center;
+  min-height: 236px;
+  padding: clamp(42px, 4.8vw, 58px) max(clamp(54px, 5.5vw, 72px), 10%);
 }
 
 .service-card p,
-.certificate-card p,
-.principle-card p {
+.certificate-card p {
   margin-bottom: 0;
+}
+
+.service-card__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
 }
 
 .card-icon {
@@ -121,41 +128,32 @@
   height: 44px;
   display: grid;
   place-items: center;
-  margin-bottom: 26px;
+  margin-bottom: 0;
   border: 1px solid rgba(215, 189, 85, 0.3);
   border-radius: 48% 52% 62% 38% / 58% 38% 62% 42%;
   color: var(--gold-pale);
   background: rgba(20, 79, 7, 0.2);
 }
 
-.principle-card .organic-card__content {
-  min-height: 116px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 28px max(42px, 9%);
-  text-align: center;
+.service-card__number {
+  color: rgba(215, 189, 85, 0.56);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
 }
 
-.principle-card svg {
-  color: var(--gold-soft);
-}
-
-.principle-card p {
-  max-width: 42rem;
-  margin: 0;
-  color: var(--text);
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-align: center;
+.service-card h3 {
+  max-width: 15ch;
+  margin-bottom: 0;
+  font-size: clamp(1.75rem, 2.55vw, 2.45rem);
+  line-height: 1.04;
 }
 
 .clinic-card .organic-card__content {
   display: grid;
-  grid-template-columns: 0.9fr 1.25fr 0.95fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
-  padding: clamp(38px, 5vw, 62px) clamp(44px, 6vw, 76px);
+  padding: clamp(34px, 4vw, 50px) clamp(38px, 5vw, 64px);
 }
 
 .clinic-item {
@@ -169,8 +167,14 @@
   text-align: center;
 }
 
-.clinic-item + .clinic-item {
+.clinic-item:nth-child(even) {
   border-left: 1px solid rgba(215, 189, 85, 0.14);
+}
+
+.clinic-item:nth-child(n + 3) {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(215, 189, 85, 0.14);
 }
 
 .clinic-item svg {
@@ -192,7 +196,6 @@
   font-family: var(--font-display);
   font-size: clamp(1.35rem, 1.8vw, 1.9rem);
   line-height: 1.05;
-  white-space: nowrap;
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
@@ -253,7 +256,9 @@
   min-width: 0;
   color: var(--text);
   font-size: clamp(0.86rem, 1.3vw, 1.02rem);
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .booking-link > svg {

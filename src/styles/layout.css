@@ -193,20 +193,22 @@
 .hero {
   min-height: calc(100svh - var(--header-height));
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+  grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
   align-items: center;
-  gap: clamp(40px, 7vw, 90px);
+  gap: clamp(34px, 6vw, 88px);
   padding: clamp(56px, 8vh, 92px) 0 clamp(80px, 10vh, 126px);
 }
 
 .hero__copy {
-  max-width: 720px;
+  position: relative;
+  z-index: 2;
+  max-width: 840px;
 }
 
 .hero h1 {
-  margin-bottom: 26px;
-  font-size: clamp(4.5rem, 8.2vw, 8.2rem);
-  line-height: 0.82;
+  margin-bottom: clamp(34px, 5vw, 58px);
+  font-size: clamp(4.7rem, 9vw, 9.4rem);
+  line-height: 0.8;
 }
 
 .hero h1 span,
@@ -219,19 +221,13 @@
 }
 
 .hero h1 em {
-  max-width: 690px;
-  margin-top: 14px;
+  max-width: 780px;
+  margin-top: 20px;
   color: var(--text);
-  font-size: 0.48em;
+  font-size: 0.39em;
   font-style: normal;
-  line-height: 1.03;
+  line-height: 1.07;
   letter-spacing: -0.018em;
-}
-
-.hero__lead {
-  max-width: 650px;
-  margin-bottom: 30px;
-  font-size: clamp(1rem, 1.4vw, 1.12rem);
 }
 
 .hero__actions {
@@ -261,87 +257,111 @@
   color: var(--mint);
 }
 
-.hero__visual {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.portrait-composition {
+.hero__ornament {
   position: relative;
-  width: min(100%, 500px);
-  padding: 42px 34px 26px 26px;
+  width: min(100%, 430px);
+  min-height: 520px;
+  justify-self: end;
+  isolation: isolate;
 }
 
-.portrait-mask {
-  position: relative;
-  z-index: 2;
-  width: min(100%, 420px);
-  margin-left: auto;
-  aspect-ratio: 0.69;
-  overflow: hidden;
-  border: 1px solid rgba(215, 189, 85, 0.34);
-  border-radius: 48% 52% 44% 56% / 35% 40% 60% 65%;
-  background: var(--panel-strong);
-  box-shadow: var(--shadow);
-}
-
-.portrait-mask::after {
+.hero__ornament::before,
+.hero__ornament::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, transparent 58%, rgba(3, 17, 9, 0.36)),
-    linear-gradient(115deg, rgba(255, 243, 163, 0.06), transparent 32%);
+  border: 1px solid rgba(215, 189, 85, 0.26);
   pointer-events: none;
 }
 
-.portrait-mask picture,
-.portrait-mask img {
-  width: 100%;
-  height: 100%;
-}
-
-.portrait-mask img {
-  object-fit: cover;
-  object-position: center 18%;
-}
-
-.portrait-glow {
-  position: absolute;
+.hero__ornament::before {
   z-index: 0;
-  top: 13%;
-  right: 6%;
-  width: 74%;
-  aspect-ratio: 1;
+  inset: 7% 2% 5% 7%;
+  border-radius: 53% 47% 62% 38% / 38% 58% 42% 62%;
+  background:
+    radial-gradient(circle at 42% 38%, rgba(20, 79, 7, 0.46), transparent 36%),
+    linear-gradient(145deg, rgba(9, 40, 22, 0.34), rgba(3, 17, 9, 0.06));
+}
+
+.hero__ornament::after {
+  z-index: 1;
+  inset: 21% 17% 19% 9%;
+  border-color: rgba(255, 230, 0, 0.38);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(20, 79, 7, 0.5), transparent 69%);
+  transform: rotate(-18deg);
 }
 
-.portrait-label {
+.hero__ornament .portrait-ornament {
+  z-index: 1;
+  inset: -4% -18% -7% -19%;
+  width: 137%;
+  height: 111%;
+}
+
+.hero__cloud {
   position: absolute;
-  z-index: 4;
-  right: 0;
-  bottom: 62px;
+  z-index: 2;
+  width: 220px;
+  color: rgba(215, 189, 85, 0.28);
+}
+
+.hero__cloud--top {
+  top: 4%;
+  right: -7%;
+  transform: rotate(-8deg);
+}
+
+.hero__cloud--bottom {
+  left: -12%;
+  bottom: 3%;
+  color: rgba(159, 204, 199, 0.17);
+  transform: rotate(174deg);
+}
+
+.hero__leaf-branch {
+  position: absolute;
+  z-index: 1;
+  right: -9%;
+  bottom: 5%;
+  width: 210px;
+  color: rgba(133, 176, 132, 0.2);
+  transform: rotate(154deg);
+}
+
+.hero__seal {
+  position: absolute;
+  z-index: 3;
+  top: 42%;
+  left: 42%;
   display: grid;
-  min-width: 138px;
-  padding: 12px 18px;
-  border: 1px solid rgba(215, 189, 85, 0.3);
-  border-radius: 30px 18px 30px 18px;
-  background: rgba(4, 21, 11, 0.88);
+  place-items: center;
+  width: 142px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(215, 189, 85, 0.42);
+  border-radius: 48% 52% 58% 42% / 54% 44% 56% 46%;
+  background: rgba(4, 21, 11, 0.84);
   box-shadow: var(--shadow-soft);
+  transform: translate(-50%, -50%) rotate(-7deg);
+  text-align: center;
 }
 
-.portrait-label small {
+.hero__seal span,
+.hero__seal strong {
+  grid-area: 1 / 1;
+}
+
+.hero__seal span {
+  margin-top: -24px;
   color: var(--text-muted);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
 }
 
-.portrait-label strong {
+.hero__seal strong {
+  margin-top: 20px;
   color: var(--gold-pale);
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.28rem;
 }
 
 .section {
@@ -369,15 +389,15 @@
 
 .about {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.38fr);
   align-items: start;
-  gap: clamp(46px, 8vw, 110px);
+  gap: clamp(42px, 6vw, 86px);
 }
 
 .about__copy {
   position: relative;
-  max-width: 650px;
-  padding: clamp(52px, 5.5vw, 76px) clamp(58px, 6vw, 84px);
+  max-width: 860px;
+  padding: clamp(54px, 5vw, 76px) clamp(58px, 5.6vw, 88px);
 }
 
 .about__copy::before {
@@ -394,8 +414,12 @@
 .about__lead {
   color: var(--text);
   font-family: var(--font-display);
-  font-size: clamp(1.45rem, 2.45vw, 1.95rem);
-  line-height: 1.18;
+  font-size: clamp(1.14rem, 1.65vw, 1.42rem);
+  line-height: 1.42;
+}
+
+.about__copy p:last-child {
+  margin-bottom: 0;
 }
 
 .about__cloud {
@@ -414,18 +438,9 @@
 }
 
 .service-card--2,
-.service-card--4 {
+.service-card--4,
+.service-card--6 {
   transform: translateY(34px);
-}
-
-.principles__grid {
-  display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: 20px 28px;
-}
-
-.principle-card:nth-child(3) {
-  margin-left: 7%;
 }
 
 .clinic {
@@ -433,6 +448,7 @@
   grid-template-columns: 0.85fr 1.15fr;
   align-items: center;
   gap: clamp(42px, 8vw, 110px);
+  padding-top: clamp(72px, 8vw, 112px);
 }
 
 .clinic__intro {
@@ -540,7 +556,7 @@
 .contacts__copy,
 .contacts__action,
 .hero__copy,
-.hero__visual {
+.hero__ornament {
   min-width: 0;
 }
 
