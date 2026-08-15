@@ -67,7 +67,7 @@
   }
 
   .contacts {
-    padding: 52px 44px;
+    padding: 64px 60px;
   }
 }
 
@@ -159,6 +159,7 @@
 
   .about,
   .clinic,
+  .booking,
   .contacts {
     grid-template-columns: 1fr;
   }
@@ -168,7 +169,7 @@
   }
 
   .about__copy {
-    padding: 34px 30px;
+    padding: 42px 38px;
   }
 
   .about__copy::before {
@@ -198,6 +199,10 @@
     min-height: 0;
   }
 
+  .service-card .organic-card__content {
+    padding: 42px max(40px, 10%);
+  }
+
   .organic-card--leaf .organic-card__shape {
     border-radius: 30px 76px 44px 66px / 34px 46px 70px 58px;
   }
@@ -215,6 +220,10 @@
   }
 
   .clinic {
+    gap: 36px;
+  }
+
+  .booking {
     gap: 36px;
   }
 
@@ -262,11 +271,6 @@
 
   .page-shell {
     width: min(calc(100% - 20px), var(--container));
-  }
-
-  .brand__mark {
-    width: 40px;
-    height: 40px;
   }
 
   .brand__copy strong {
@@ -367,6 +371,10 @@
     padding: 30px max(28px, 7%);
   }
 
+  .service-card .organic-card__content {
+    padding: 34px max(30px, 8%);
+  }
+
   .principle-card .organic-card__content {
     display: flex;
     justify-content: center;
@@ -380,11 +388,7 @@
 
   .certificate-card,
   .certificate-card .organic-card__content {
-    min-height: 220px;
-  }
-
-  .certificate-card h3 {
-    margin-top: 42px;
+    min-height: 0;
   }
 
   .contacts {
@@ -399,6 +403,20 @@
   .telegram-card__icon {
     width: 46px;
     height: 46px;
+  }
+
+  .booking-card .organic-card__content {
+    padding: 34px 26px;
+  }
+
+  .booking-link {
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .booking-link__icon {
+    width: 44px;
+    height: 44px;
   }
 
   .contacts__meta {
