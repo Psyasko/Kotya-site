@@ -71,6 +71,15 @@ export function SectionCloud({ className = '' }) {
   );
 }
 
+export function StudioDivider() {
+  return (
+    <svg className="studio-divider" viewBox="0 0 100 100" fill="none" aria-hidden="true" preserveAspectRatio="none">
+      <path d="M5 49C26 46 38 53 53 50C69 47 80 51 95 48" />
+      <path d="M51 5C48 27 54 40 50 54C47 70 52 82 49 95" />
+    </svg>
+  );
+}
+
 export function LeafBranch({ className = '' }) {
   return (
     <svg className={`leaf-branch ${className}`} viewBox="0 0 260 420" fill="none" aria-hidden="true">
