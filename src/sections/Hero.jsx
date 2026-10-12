@@ -6,7 +6,6 @@ export default function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero__copy">
-        <p className="eyebrow hero__enter" style={{ '--i': 0 }}>Тиша · увага · відновлення</p>
         <h1>
           <span className="hero__name hero__enter" style={{ '--i': 1 }}>{specialist.name}</span>
           <span className="hero__role hero__enter" style={{ '--i': 2 }}>— {specialist.role}</span>
