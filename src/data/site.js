@@ -12,7 +12,11 @@ export const specialist = {
   schedule: '9:00–20:00',
   // Портрет у голові дракона. Поки null — показується монограма.
   // Приклад: { src: '/images/portrait.webp', alt: 'Катерина, майстриня масажу' }
-  photo: null,
+  photo: {
+    src: '/images/portrait-720.webp',
+    srcSet: '/images/portrait-480.webp 480w, /images/portrait-720.webp 720w, /images/portrait-960.webp 960w',
+    alt: 'Катерина, майстриня масажу'
+  },
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=DeMassage%2C%20%D0%B2%D1%83%D0%BB.%20%D0%A1%D1%82%D1%80%D0%B8%D0%B9%D1%81%D1%8C%D0%BA%D0%B0%20108%2C%20%D0%9B%D1%8C%D0%B2%D1%96%D0%B2'
 };
 

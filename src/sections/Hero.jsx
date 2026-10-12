@@ -34,7 +34,17 @@ export default function Hero() {
         <span className="hero__moon" />
         <DragonHead
           portrait={specialist.photo
-            ? <img src={specialist.photo.src} alt={specialist.photo.alt} fetchPriority="high" />
+            ? (
+              <img
+                src={specialist.photo.src}
+                srcSet={specialist.photo.srcSet}
+                sizes="(max-width: 820px) 220px, 360px"
+                alt={specialist.photo.alt}
+                width="720"
+                height="720"
+                fetchPriority="high"
+              />
+            )
             : <span className="dragon-head__monogram" aria-hidden="true">{specialist.name[0]}</span>}
         />
       </div>
