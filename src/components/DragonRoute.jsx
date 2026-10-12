@@ -113,17 +113,21 @@ export default function DragonRoute() {
   const [geo, setGeo] = useState(null);
   const layers = useRef([]);
   const sparks = useRef([]);
-  const geoRef = useRef(null);
-  geoRef.current = geo;
 
   useEffect(() => {
     let timer;
+    let lastKey = '';
     const update = () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         const m = measure();
-        if (m) setGeo(buildGeometry(m));
-      }, 120);
+        if (!m) return;
+        // На телефоні адресний рядок постійно змінює висоту вікна — не перебудовуємо геометрію через дрібниці.
+        const key = [m.width, Math.round(m.height / 40), Math.round(m.viewport / (m.mobile ? 200 : 40))].join('|');
+        if (key === lastKey) return;
+        lastKey = key;
+        setGeo(buildGeometry(m));
+      }, 150);
     };
     update();
     document.fonts?.ready.then(update);
@@ -137,47 +141,80 @@ export default function DragonRoute() {
     };
   }, []);
 
+  // Паралакс без scroll-timeline: оновлюємо шари лише під час прокручування.
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return undefined;
-    const cssTimeline = window.CSS?.supports?.('animation-timeline: scroll()');
-    let frame;
-    let cycle = null;
-
-    const loop = (now) => {
-      frame = requestAnimationFrame(loop);
-      const g = geoRef.current;
-      if (!g) return;
-      const scroll = window.scrollY;
-
-      if (!cssTimeline) {
-        layers.current.forEach((el) => {
-          if (el) el.style.transform = `translate3d(0, ${Number(el.dataset.k) * scroll}px, 0)`;
-        });
-      }
-
-      // Відблиск пливе вниз тілом у межах видимої частини екрана.
-      // Після помітного прокручування цикл починається заново з новим діапазоном.
-      if (!cycle || now - cycle.start > GLINT_CYCLE || Math.abs(scroll - cycle.scroll) > g.viewport * 0.25) {
-        const offset = g.depth.body * scroll;
-        const from = distanceAtY(g.line, scroll - offset + g.viewport * 0.06);
-        const to = distanceAtY(g.line, scroll - offset + g.viewport * 0.94);
-        cycle = { from, to, scroll, start: now };
-      }
-      const phase = (now - cycle.start) / GLINT_CYCLE;
-      const eased = phase < 0.5 ? 2 * phase * phase : 1 - (-2 * phase + 2) ** 2 / 2;
-      const visible = cycle.to - cycle.from > 60 ? Math.sin(Math.PI * phase) : 0;
-      sparks.current.forEach((el, i) => {
-        if (!el) return;
-        const p = pointAt(g.line, cycle.from + (cycle.to - cycle.from) * eased - i * 26);
-        el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
-        el.style.opacity = String(visible * (i ? 0.55 : 1));
+    if (window.CSS?.supports?.('animation-timeline: scroll()')) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    let frame = 0;
+    const apply = () => {
+      frame = 0;
+      layers.current.forEach((el) => {
+        if (el) el.style.transform = `translate3d(0, ${Number(el.dataset.k) * window.scrollY}px, 0)`;
       });
     };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(apply); };
+    apply();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [geo]);
 
-    frame = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(frame);
-  }, []);
+  // Відблиск: на кожен цикл будуємо Web Animation (transform + opacity), яку браузер
+  // програє на компоновщику — без JS у кожному кадрі.
+  useEffect(() => {
+    if (!geo || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    let animations = [];
+    let timer;
+    let lastScroll = -Infinity;
+    let stopped = false;
+
+    const run = () => {
+      if (stopped) return;
+      const scroll = window.scrollY;
+      lastScroll = scroll;
+      const offset = geo.depth.body * scroll;
+      const from = distanceAtY(geo.line, scroll - offset + geo.viewport * 0.06);
+      const to = distanceAtY(geo.line, scroll - offset + geo.viewport * 0.94);
+      animations.forEach((animation) => animation.cancel());
+      animations = [];
+      if (to - from < 60) return;
+
+      const steps = 24;
+      sparks.current.forEach((el, i) => {
+        if (!el) return;
+        const frames = Array.from({ length: steps + 1 }, (_, s) => {
+          const phase = s / steps;
+          const eased = phase < 0.5 ? 2 * phase * phase : 1 - (-2 * phase + 2) ** 2 / 2;
+          const p = pointAt(geo.line, from + (to - from) * eased - i * 26);
+          return {
+            offset: phase,
+            transform: `translate3d(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px, 0)`,
+            opacity: Math.sin(Math.PI * phase) * (i ? 0.55 : 1)
+          };
+        });
+        animations.push(el.animate(frames, { duration: GLINT_CYCLE, easing: 'linear' }));
+      });
+      if (animations[0]) animations[0].onfinish = run;
+    };
+
+    const onScroll = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        if (Math.abs(window.scrollY - lastScroll) > geo.viewport * 0.25) run();
+      }, 160);
+    };
+
+    run();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      stopped = true;
+      clearTimeout(timer);
+      animations.forEach((animation) => animation.cancel());
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [geo]);
 
   if (!geo) return <div className="dragon-route" aria-hidden="true" />;
 

@@ -72,13 +72,13 @@
 .dragon-head__whisker {
   animation:
     fade-in 1.4s ease 1.6s both,
-    whisker-sway 9s ease-in-out 3s infinite;
+    whisker-sway 9s ease-in-out 3s 1;
 }
 
 .dragon-head__pearl {
   animation:
     pearl-in 1.2s var(--ease) 2.1s both,
-    pearl-breathe 7s ease-in-out 3.4s infinite;
+    pearl-breathe 7s ease-in-out 3.4s 1;
 }
 
 /* ---------- Тіло дракона ---------- */
