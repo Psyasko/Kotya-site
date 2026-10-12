@@ -2,7 +2,7 @@
 
 .hero__moon {
   position: absolute;
-  inset: 8% 2% 18% 2%;
+  inset: 10% 6% 12% 16%;
   border-radius: 50%;
   background: radial-gradient(circle at 50% 46%, rgba(20, 79, 7, 0.4), rgba(9, 40, 22, 0.1) 58%, transparent 70%);
 }
@@ -27,13 +27,13 @@
   z-index: 2;
 }
 
-/* Медальйон: center (300, 290), r = 150 у системі 600×660. */
+/* Медальйон: center (380, 340), r = 190 у системі 700×700. */
 .dragon-head__portrait {
   position: absolute;
   z-index: 1;
-  left: 25%;
-  top: 21.21%;
-  width: 50%;
+  left: 27.14%;
+  top: 21.43%;
+  width: 54.29%;
   aspect-ratio: 1;
   display: grid;
   place-items: center;
@@ -54,7 +54,7 @@
 .dragon-head__monogram {
   color: var(--gold-pale);
   font-family: var(--font-display);
-  font-size: clamp(4.5rem, 9vw, 8rem);
+  font-size: clamp(5rem, 11vw, 9.5rem);
   font-weight: 500;
   line-height: 1;
   opacity: 0.9;

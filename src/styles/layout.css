@@ -176,7 +176,7 @@
 .hero {
   min-height: calc(100svh - var(--header-height));
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
   align-items: center;
   gap: clamp(28px, 5vw, 72px);
   padding: clamp(40px, 7vh, 84px) 0 clamp(64px, 9vh, 112px);
@@ -243,10 +243,10 @@
 .hero__art {
   position: relative;
   z-index: 1;
-  width: min(118%, 560px);
-  aspect-ratio: 600 / 660;
+  width: min(122%, 660px);
+  aspect-ratio: 1;
   justify-self: end;
-  margin-right: -3%;
+  margin-right: -4%;
 }
 
 /* ---------- Секції ---------- */

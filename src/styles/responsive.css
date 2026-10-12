@@ -149,7 +149,7 @@
   }
 
   .hero__art {
-    width: min(92%, 420px);
+    width: min(100%, 480px);
     justify-self: center;
     margin-top: 8px;
   }
@@ -255,7 +255,7 @@
   }
 
   .hero__art {
-    width: min(94%, 360px);
+    width: min(100%, 400px);
   }
 
   .about-card .organic-card__content {

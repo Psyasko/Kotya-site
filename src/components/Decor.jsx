@@ -1,57 +1,44 @@
 // Декоративна графіка сайту: золоті каліграфічні лінії, хмари жуї, листя.
 // Усі елементи — aria-hidden і не перехоплюють кліків.
 
-// Медальйон із лускою по колу: 44 дуги між внутрішнім і зовнішнім кільцем.
-const CX = 300;
-const CY = 290;
-const SCALLOPS = Array.from({ length: 44 }, (_, i) => {
-  const a0 = (i / 44) * Math.PI * 2;
-  const a1 = ((i + 1) / 44) * Math.PI * 2;
-  const am = (a0 + a1) / 2;
-  const at = (r, a) => `${(CX + r * Math.cos(a)).toFixed(1)} ${(CY + r * Math.sin(a)).toFixed(1)}`;
-  return `M${at(156, a0)}Q${at(174, am)} ${at(156, a1)}`;
+// Медальйон: center (380, 340), r = 190 у системі 700×700.
+const CX = 380;
+const CY = 340;
+const polar = (r, deg) => {
+  const a = (deg * Math.PI) / 180;
+  return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+};
+const fmt = ([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`;
+
+// Луска по колу медальйона.
+const SCALLOPS = Array.from({ length: 52 }, (_, i) => {
+  const a0 = (i / 52) * 360;
+  const a1 = ((i + 1) / 52) * 360;
+  return `M${fmt(polar(196, a0))}Q${fmt(polar(214, (a0 + a1) / 2))} ${fmt(polar(196, a1))}`;
 }).join('');
 
-// Ліва половина голови; права — дзеркальна копія.
-function HeadHalf() {
-  return (
-    <>
-      {/* Роги-стрічки з відростками */}
-      <g className="dragon-head__horns">
-        <path d="M238 146C216 104 192 70 150 36C170 68 198 100 254 136" />
-        <path d="M206 102C188 88 170 84 148 88C168 94 184 102 198 114" />
-        <path d="M184 72C170 58 156 54 138 58C154 62 166 70 176 80" />
-        <path d="M268 126C264 92 254 66 236 46C252 72 262 98 282 122" />
-      </g>
-      {/* Полум'яна грива, відкинута назад і вгору */}
-      <g className="dragon-head__mane">
-        <path d="M150 214C116 196 96 168 92 128C110 160 132 176 160 184" />
-        <path d="M146 206C126 190 112 170 106 146" strokeOpacity="0.55" />
-        <path d="M134 262C96 252 66 226 52 188C78 212 104 226 136 232" />
-        <path d="M132 254C106 244 86 226 74 204" strokeOpacity="0.55" />
-        <path d="M134 318C96 326 62 314 40 288C70 300 98 300 128 294" />
-        <path d="M128 312C102 314 80 308 62 296" strokeOpacity="0.55" />
-      </g>
-      {/* Щелепа з іклом і полум'ям на вилицях */}
-      <g className="dragon-head__jaw">
-        <path d="M184 410C212 454 254 482 300 488" />
-        <path d="M246 476L256 452L264 481" />
-        <path d="M196 430C176 440 164 458 160 480C176 468 192 460 212 452" />
-        <path d="M170 386C148 392 134 408 128 428C144 418 158 412 178 408" />
-      </g>
-      {/* Довгий вус зі спіраллю */}
-      <path className="dragon-head__whisker" d="M224 456C182 486 146 516 134 556C122 594 150 618 176 606C196 596 190 570 170 574" />
-    </>
-  );
-}
+// Грива: полум'яні пасма праворуч, відкинуті назад — у бік, куди йде тіло.
+const MANE = [-58, -38, -18, 2, 22, 42, 62].map((deg, i) => {
+  const len = [70, 92, 80, 96, 78, 88, 64][i];
+  const [bx, by] = polar(228, deg);
+  const sweep = ((deg + 34) * Math.PI) / 180;
+  const tip = [bx + Math.cos(sweep) * len, by + Math.sin(sweep) * len];
+  const b1 = polar(228, deg - 7);
+  const b2 = polar(228, deg + 7);
+  const c1 = [(b1[0] + tip[0]) / 2 - Math.sin(sweep) * 16, (b1[1] + tip[1]) / 2 + Math.cos(sweep) * 16];
+  const c2 = [(b2[0] + tip[0]) / 2 + Math.sin(sweep) * 6, (b2[1] + tip[1]) / 2 - Math.cos(sweep) * 6];
+  const vein = [bx + Math.cos(sweep) * len * 0.62, by + Math.sin(sweep) * len * 0.62];
+  return { shape: `M${fmt(b1)}Q${fmt(c1)} ${fmt(tip)}Q${fmt(c2)} ${fmt(b2)}`, vein: `M${fmt([bx, by])}L${fmt(vein)}` };
+});
 
-// Голова дракона навколо портрета: портрет — це «обличчя», з-за медальйона виходить тіло.
+// Голова дракона в три чверті: морда з відкритою пащею тягнеться до перлини,
+// роги й грива відкинуті назад. Портрет — «обличчя», з-за медальйона виходить тіло.
 export function DragonHead({ portrait }) {
   return (
     <div className="dragon-head">
-      <svg className="dragon-head__back" viewBox="0 0 600 660" fill="none" aria-hidden="true">
+      <svg className="dragon-head__back" viewBox="0 0 700 700" fill="none" aria-hidden="true">
         <defs>
-          <linearGradient id="headGold" x1="60" y1="20" x2="540" y2="640" gradientUnits="userSpaceOnUse">
+          <linearGradient id="headGold" x1="40" y1="20" x2="660" y2="680" gradientUnits="userSpaceOnUse">
             <stop stopColor="#fff3a3" />
             <stop offset="0.5" stopColor="#d7bd55" />
             <stop offset="1" stopColor="#9fccc7" stopOpacity="0.8" />
@@ -62,33 +49,59 @@ export function DragonHead({ portrait }) {
           </radialGradient>
         </defs>
         <g stroke="url(#headGold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <HeadHalf />
-          <g transform="matrix(-1 0 0 1 600 0)">
-            <HeadHalf />
+          {/* Роги-стрічки з відростками */}
+          <g className="dragon-head__horns">
+            <path d="M300 166C330 100 400 50 500 28C440 60 380 100 338 158" />
+            <path d="M400 72C420 44 452 28 488 24M360 104C368 72 384 50 408 36" />
+            <path d="M346 152C400 108 470 92 560 98C500 108 440 124 392 150" strokeOpacity="0.75" />
+            <path d="M470 100C490 82 512 74 540 74" strokeOpacity="0.75" />
           </g>
-          {/* Борода-полум'я під підборіддям */}
+          <g className="dragon-head__mane">
+            {MANE.map(({ shape, vein }) => (
+              <g key={shape}>
+                <path d={shape} fill="rgba(215, 189, 85, 0.06)" />
+                <path d={vein} strokeOpacity="0.5" strokeWidth="1" />
+              </g>
+            ))}
+          </g>
+          {/* Морда: верхня щелепа із закрученим носом, відкрита паща з іклами та язиком */}
+          <g className="dragon-head__jaw">
+            <path d="M196 252C150 238 104 238 70 256C46 270 44 300 66 308C84 314 102 302 96 288" />
+            <path d="M66 308C110 318 154 322 192 326" />
+            <path d="M90 262C80 248 92 234 108 242M120 244C128 234 140 232 150 238" />
+            <path d="M104 314L110 336L118 316M150 320L155 338L162 321" />
+            <path d="M196 378C160 400 118 404 86 392C104 414 150 424 206 418" />
+            <path d="M100 396L108 376L114 398" />
+            <path d="M120 352C100 350 86 360 88 372C90 380 100 380 102 372" strokeOpacity="0.7" />
+            <path d="M236 492C220 520 222 548 240 568C240 540 248 520 262 504M262 512C254 540 262 566 284 582C280 556 284 536 296 522" />
+          </g>
+          {/* Борода-полум'я під пащею */}
           <g className="dragon-head__beard" strokeWidth="1.3">
-            <path d="M284 490C276 520 286 550 310 572C298 544 300 516 312 492" />
-            <path d="M298 500C296 524 302 544 312 558" strokeOpacity="0.55" />
+            <path d="M150 420C140 456 156 486 140 520C158 498 168 470 170 424M186 420C184 456 200 480 192 514C206 490 210 462 206 422" />
           </g>
+          {/* Довгі вуса зі спіралями */}
+          <path className="dragon-head__whisker" d="M100 262C60 230 40 180 62 140C80 110 118 116 116 144C114 160 96 162 92 150" />
+          <path className="dragon-head__whisker dragon-head__whisker--low" d="M80 306C40 330 22 390 44 440C62 480 106 478 108 446C108 426 86 420 78 436" />
         </g>
         <g className="dragon-head__pearl">
-          <circle cx="70" cy="470" r="30" fill="url(#headPearl)" />
-          <circle cx="70" cy="470" r="17" stroke="#d7bd55" strokeOpacity="0.5" />
-          <circle cx="70" cy="470" r="7" fill="#ffe600" />
+          <circle cx="34" cy="356" r="28" fill="url(#headPearl)" />
+          <circle cx="34" cy="356" r="15" stroke="#d7bd55" strokeOpacity="0.5" />
+          <circle cx="34" cy="356" r="6.5" fill="#ffe600" />
         </g>
       </svg>
 
       <div className="dragon-head__portrait">{portrait}</div>
 
-      <svg className="dragon-head__front" viewBox="0 0 600 660" fill="none" aria-hidden="true">
-        <g stroke="url(#headGold)" strokeLinecap="round">
-          <circle className="dragon-head__ring" cx={CX} cy={CY} r="154" strokeWidth="1.6" pathLength="1" />
+      <svg className="dragon-head__front" viewBox="0 0 700 700" fill="none" aria-hidden="true">
+        <g stroke="url(#headGold)" strokeLinecap="round" strokeLinejoin="round">
+          <circle className="dragon-head__ring" cx={CX} cy={CY} r="194" strokeWidth="1.6" pathLength="1" />
           <path className="dragon-head__scallops" d={SCALLOPS} strokeWidth="1" />
-          <circle className="dragon-head__ring dragon-head__ring--outer" cx={CX} cy={CY} r="178" strokeWidth="0.8" pathLength="1" />
+          <circle className="dragon-head__ring dragon-head__ring--outer" cx={CX} cy={CY} r="222" strokeWidth="0.8" pathLength="1" />
+          {/* Око з полум'яною бровою над мордою */}
           <g className="dragon-head__brows" strokeWidth="1.4">
-            <path d="M196 158C212 132 246 118 280 124M204 146C186 126 180 104 192 86C194 104 202 116 214 124M226 132C214 112 214 94 226 80C228 96 234 108 244 116" />
-            <path transform="matrix(-1 0 0 1 600 0)" d="M196 158C212 132 246 118 280 124M204 146C186 126 180 104 192 86C194 104 202 116 214 124M226 132C214 112 214 94 226 80C228 96 234 108 244 116" />
+            <path d="M168 196C186 178 214 174 236 184C220 202 192 208 168 196Z" fill="rgba(3, 17, 9, 0.85)" />
+            <circle cx="204" cy="192" r="4.5" fill="#fff3a3" stroke="none" />
+            <path d="M160 176C182 146 222 132 262 140M172 162C160 138 164 112 184 96C182 120 190 136 204 146M206 146C200 120 210 98 232 86C226 108 230 124 240 136" />
           </g>
         </g>
       </svg>
