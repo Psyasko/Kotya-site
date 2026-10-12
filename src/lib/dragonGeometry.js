@@ -1,6 +1,6 @@
 // Генерує тіло дракона в реальних пікселях сторінки: без розтягування луски й гребеня.
 
-const r1 = (n) => Math.round(n * 10) / 10;
+const r1 = (n) => Math.round(n);
 const pt = (p) => `${r1(p.x)} ${r1(p.y)}`;
 const smoothstep = (a, b, x) => {
   const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
@@ -81,7 +81,7 @@ export function buildBody(line, { maxWidth, legs = true, detail = 1 }) {
   line.forEach((p, i) => {
     if (p.d < next) return;
     const w = widthAt(p);
-    next = p.d + Math.max(5, (w * 0.42) / detail);
+    next = p.d + Math.max(7, (w * 0.6) / detail);
     scales += `M${pt(right[i])}Q${pt(add(add(p, p.n, -w * 0.25), p.t, w * 0.3))} ${pt(p)}`;
   });
 
@@ -91,7 +91,7 @@ export function buildBody(line, { maxWidth, legs = true, detail = 1 }) {
     line.forEach((p) => {
       if (p.d < at) return;
       const w = widthAt(p);
-      const step = Math.max(6, (w * 0.32) / detail);
+      const step = Math.max(9, (w * 0.46) / detail);
       at = p.d + step;
       const c = add(p, p.n, w * row);
       const half = Math.max(1.6, w * 0.09);

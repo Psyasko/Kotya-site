@@ -97,7 +97,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  will-change: transform;
 }
 
 .dragon-layer svg {
@@ -186,7 +185,6 @@
   border-radius: 50%;
   background: radial-gradient(circle, #fffbe0 0 12%, rgba(255, 230, 0, 0.55) 26%, rgba(255, 230, 0, 0) 70%);
   opacity: 0;
-  will-change: transform, opacity;
 }
 
 .dragon-spark--trail {
