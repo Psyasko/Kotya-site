@@ -1,0 +1,68 @@
+/* ---------- Дракон у hero ---------- */
+
+.hero__moon {
+  position: absolute;
+  inset: 22% 4% 14% 14%;
+  border: 1px solid var(--gold-line-faint);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 34%, rgba(255, 243, 163, 0.07), transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(20, 79, 7, 0.42), rgba(9, 40, 22, 0.12) 62%, transparent 72%);
+}
+
+.hero-dragon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-dragon__draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.hero-dragon__whisker {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+}
+
+.hero-dragon__whisker--low {
+  transform-origin: 100% 0%;
+}
+
+.hero-dragon__pearl {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ---------- Драконячий маршрут крізь сторінку ---------- */
+
+.dragon-route {
+  position: absolute;
+  z-index: 1;
+  /* Виходить за контейнер, але не далі країв вікна (без горизонтального скролу). */
+  inset: 92svh max(-7vw, calc((100% - 100vw) / 2 + 10px)) 90px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.dragon-route svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dragon-route__line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+/* ---------- Дрібний декор ---------- */
+
+.section-cloud {
+  pointer-events: none;
+}
+
+.leaf-branch {
+  pointer-events: none;
+}
