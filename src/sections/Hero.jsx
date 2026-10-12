@@ -1,5 +1,5 @@
 import { ChevronRight, HeartHandshake, MapPin, MessageCircle } from 'lucide-react';
-import { HeroDragon } from '../components/Decor';
+import { DragonHead } from '../components/Decor';
 import { specialist } from '../data/site';
 
 export default function Hero() {
@@ -30,9 +30,13 @@ export default function Hero() {
         </ul>
       </div>
 
-      <div className="hero__art" aria-hidden="true">
+      <div className="hero__art">
         <span className="hero__moon" />
-        <HeroDragon />
+        <DragonHead
+          portrait={specialist.photo
+            ? <img src={specialist.photo.src} alt={specialist.photo.alt} fetchPriority="high" />
+            : <span className="dragon-head__monogram" aria-hidden="true">{specialist.name[0]}</span>}
+        />
       </div>
     </section>
   );

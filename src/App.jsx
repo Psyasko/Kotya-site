@@ -1,4 +1,5 @@
-import { DragonRoute, LeafBranch } from './components/Decor';
+import { LeafBranch } from './components/Decor';
+import DragonRoute from './components/DragonRoute';
 import { useReveal } from './hooks/useReveal';
 import About from './sections/About';
 import Booking from './sections/Booking';
@@ -22,8 +23,23 @@ function App() {
         <LeafBranch className="site-leaf site-leaf--right" />
       </div>
 
+      {/* Спільні градієнти для органічних форм карток. */}
+      <svg className="svg-defs" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="organicFill" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0" stopColor="#0d3a1c" stopOpacity="0.94" />
+            <stop offset="1" stopColor="#04150b" stopOpacity="0.96" />
+          </linearGradient>
+          <radialGradient id="organicGlow" cx="0.22" cy="0" r="0.9">
+            <stop offset="0" stopColor="#fff3a3" stopOpacity="0.1" />
+            <stop offset="1" stopColor="#fff3a3" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+      </svg>
+
+      <DragonRoute />
+
       <div className="page-shell">
-        <DragonRoute />
         <Header />
 
         <main>

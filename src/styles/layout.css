@@ -243,11 +243,10 @@
 .hero__art {
   position: relative;
   z-index: 1;
-  width: min(118%, 540px);
-  aspect-ratio: 560 / 680;
+  width: min(118%, 560px);
+  aspect-ratio: 600 / 660;
   justify-self: end;
-  margin-right: -2%;
-  pointer-events: none;
+  margin-right: -3%;
 }
 
 /* ---------- Секції ---------- */
@@ -261,6 +260,12 @@
   min-width: 0;
   max-width: 760px;
   margin-bottom: var(--space-xl);
+}
+
+/* М'який темний ореол: лінії декору за текстом не заважають читанню. */
+.section-heading h2,
+.section-heading p {
+  text-shadow: 0 0 22px rgba(2, 11, 6, 0.95), 0 0 6px rgba(2, 11, 6, 0.8);
 }
 
 .section-heading__lead {

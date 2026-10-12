@@ -42,54 +42,69 @@
   animation: moon-in 1.8s var(--ease) 200ms both;
 }
 
-.hero-dragon__draw {
-  animation: draw-line 2.6s var(--ease-in-out) 350ms both;
+.dragon-head__ring {
+  animation: draw-line 2.2s var(--ease-in-out) 300ms both;
 }
 
-.hero-dragon__draw--late {
-  animation-delay: 650ms;
+.dragon-head__ring--outer {
+  animation-delay: 600ms;
 }
 
-.hero-dragon__head {
-  animation: fade-in 1.2s ease 1.4s both;
+.dragon-head__portrait {
+  animation: moon-in 1.6s var(--ease) 250ms both;
 }
 
-.hero-dragon__scales,
-.hero-dragon__fade {
-  animation: fade-in 1.4s ease 1.9s both;
+.dragon-head__scallops,
+.dragon-head__brows {
+  animation: fade-in 1.2s ease 1.1s both;
 }
 
-.hero-dragon__clouds {
-  animation: fade-in 2s ease 600ms both;
+.dragon-head__horns,
+.dragon-head__mane,
+.dragon-head__jaw {
+  animation: rise-in 1.4s var(--ease) 1.3s both;
 }
 
-.hero-dragon__whisker {
-  animation: whisker-sway 9s ease-in-out 2.6s infinite;
+.dragon-head__beard {
+  animation: fade-in 1.4s ease 1.7s both;
 }
 
-.hero-dragon__whisker--low {
-  animation-duration: 11s;
-  animation-direction: reverse;
-}
-
-.hero-dragon__pearl {
+.dragon-head__whisker {
   animation:
-    pearl-in 1.2s var(--ease) 2.2s both,
+    fade-in 1.4s ease 1.6s both,
+    whisker-sway 9s ease-in-out 3s infinite;
+}
+
+.dragon-head__pearl {
+  animation:
+    pearl-in 1.2s var(--ease) 2.1s both,
     pearl-breathe 7s ease-in-out 3.4s infinite;
 }
 
-/* ---------- Драконячий маршрут ---------- */
+/* ---------- Тіло дракона ---------- */
 
-.dragon-route__line {
-  animation: draw-line 2.8s var(--ease) 300ms both;
+.dragon-body__edge {
+  animation: draw-line 3.4s var(--ease-in-out) 900ms both;
 }
 
-/* Там, де браузер підтримує, лінія «росте» разом із прокручуванням. */
+.dragon-body__fill,
+.dragon-body__halo,
+.dragon-body__scales,
+.dragon-body__spikes,
+.dragon-body__limbs,
+.dragon-body__spine,
+.dragon-body__tail,
+.dragon-echo,
+.dragon-cloud {
+  animation: fade-in 2.4s ease 1.6s both;
+}
+
+/* Паралакс: шари рухаються з різною швидкістю відносно сторінки.
+   Де scroll-timeline немає, той самий зсув задає JS. */
 @supports (animation-timeline: scroll()) {
-  .dragon-route__line {
-    animation: route-grow linear both;
+  .dragon-layer {
+    animation: dragon-parallax linear both;
     animation-timeline: scroll(root block);
-    animation-range: 0% 97%;
   }
 
   .about__cloud,
@@ -134,9 +149,9 @@
   to { stroke-dashoffset: 0; }
 }
 
-@keyframes route-grow {
-  from { stroke-dashoffset: 1.04; }
-  to { stroke-dashoffset: 0; }
+@keyframes dragon-parallax {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, calc(var(--k) * var(--scroll-max) * 1px), 0); }
 }
 
 @keyframes whisker-sway {
@@ -210,9 +225,13 @@
     transform: none;
   }
 
-  .dragon-route__line,
+  .dragon-layer,
   .about__cloud,
   .booking__cloud {
     animation: none !important;
+  }
+
+  .dragon-spark {
+    display: none;
   }
 }

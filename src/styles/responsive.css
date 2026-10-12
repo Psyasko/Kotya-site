@@ -149,13 +149,9 @@
   }
 
   .hero__art {
-    width: min(80%, 320px);
+    width: min(92%, 420px);
     justify-self: center;
     margin-top: 8px;
-  }
-
-  .dragon-route {
-    display: none;
   }
 
   .about,
@@ -207,6 +203,23 @@
     min-height: 0;
   }
 
+  /* На вузьких екранах — виразні SVG-силуети замість border-radius. */
+  .organic-card__shape {
+    display: none;
+  }
+
+  .organic-card__outline {
+    display: block;
+  }
+
+  .organic-card:nth-child(odd) .organic-card__outline {
+    rotate: -0.8deg;
+  }
+
+  .organic-card:nth-child(even) .organic-card__outline {
+    rotate: 0.9deg;
+  }
+
   .studio-divider {
     display: none;
   }
@@ -242,7 +255,7 @@
   }
 
   .hero__art {
-    width: min(76%, 280px);
+    width: min(94%, 360px);
   }
 
   .about-card .organic-card__content {
