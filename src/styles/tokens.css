@@ -1,29 +1,89 @@
 :root {
+  /* Палітра власниці */
   --bg-ink: #020b06;
   --bg-deep: #04150b;
   --bg-green: #092816;
   --bg-emerald: #144f07;
-  --panel: rgba(8, 35, 20, 0.76);
-  --panel-strong: rgba(5, 25, 14, 0.9);
   --gold-soft: #d7bd55;
   --gold-pale: #fff3a3;
   --gold-bright: #ffe600;
-  --gold-line: rgba(215, 189, 85, 0.27);
-  --gold-line-strong: rgba(215, 189, 85, 0.5);
   --sage: #85b084;
   --mint: #9fccc7;
   --text: #f3efdf;
-  --text-soft: rgba(243, 239, 223, 0.78);
-  --text-muted: rgba(243, 239, 223, 0.58);
-  --line: rgba(159, 204, 199, 0.12);
-  --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
-  --shadow-soft: 0 18px 46px rgba(0, 0, 0, 0.24);
+
+  /* Похідні кольори */
+  --text-soft: rgba(243, 239, 223, 0.86);
+  --text-muted: rgba(243, 239, 223, 0.7);
+  --gold-line-faint: rgba(215, 189, 85, 0.14);
+  --gold-line: rgba(215, 189, 85, 0.3);
+  --gold-line-strong: rgba(215, 189, 85, 0.58);
+  --mint-line: rgba(159, 204, 199, 0.16);
+
+  /* Поверхні: від найглибшої до найвищої */
+  --surface-sunken: rgba(2, 13, 7, 0.6);
+  --surface-raised:
+    linear-gradient(150deg, rgba(20, 79, 7, 0.24), transparent 46%),
+    linear-gradient(165deg, rgba(11, 46, 25, 0.9), rgba(4, 21, 11, 0.95));
+  --surface-raised-hover:
+    linear-gradient(150deg, rgba(20, 79, 7, 0.36), transparent 50%),
+    linear-gradient(165deg, rgba(13, 54, 29, 0.94), rgba(5, 24, 13, 0.97));
+  --surface-glass: rgba(3, 17, 9, 0.86);
+
+  --shadow-soft: 0 18px 46px rgba(0, 0, 0, 0.26);
+  --shadow-deep: 0 28px 80px rgba(0, 0, 0, 0.38);
+
+  /* Типографіка */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', Inter, system-ui, sans-serif;
+  --text-xs: 0.72rem;
+  --text-sm: 0.86rem;
+  --text-base: 1rem;
+  --title-sm: clamp(1.35rem, 1.1rem + 0.7vw, 1.75rem);
+  --title-md: clamp(1.6rem, 1.2rem + 1.2vw, 2.3rem);
+  --title-lg: clamp(2.5rem, 1.5rem + 3.4vw, 4.6rem);
+  --title-xl: clamp(3.8rem, 1.6rem + 8vw, 9rem);
+
+  /* Відступи */
+  --space-2xs: 6px;
+  --space-xs: 10px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 36px;
+  --space-xl: clamp(40px, 5vw, 64px);
+  --space-section: clamp(72px, 8vw, 120px);
+  --gutter: clamp(14px, 3vw, 24px);
+
+  /* Розмітка */
   --container: 1180px;
   --header-height: 78px;
   --radius-sm: 18px;
   --radius-md: 28px;
-  --radius-lg: 44px;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Manrope', Inter, system-ui, sans-serif;
+
+  /* Органічні форми: споріднені, але різні силуети */
+  --shape-leaf: 26% 74% 38% 62% / 30% 38% 62% 70%;
+  --shape-pebble: 40% 60% 55% 45% / 36% 43% 57% 64%;
+  --shape-drop: 56% 44% 36% 64% / 42% 32% 68% 58%;
+  --shape-wave: 24% 76% 34% 66% / 32% 26% 74% 68%;
+  --shape-badge: 48% 52% 62% 38% / 58% 38% 62% 42%;
+
+  /* Рух */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur-base: 360ms;
+  --dur-reveal: 900ms;
+  --stagger: 110ms;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --header-height: 70px;
+    --stagger: 0ms;
+
+    /* На вузьких екранах — фіксовані радіуси, щоб асиметрія не з'їдала текст. */
+    --shape-leaf: 30px 76px 44px 66px / 34px 46px 70px 58px;
+    --shape-pebble: 62px 34px 58px 40px / 44px 64px 38px 56px;
+    --shape-drop: 78px 38px 48px 68px / 46px 34px 72px 58px;
+    --shape-wave: 38px 82px 46px 72px / 40px 30px 76px 66px;
+  }
 }

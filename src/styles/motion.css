@@ -1,74 +1,237 @@
+/* ---------- Поява при прокручуванні ---------- */
+
 [data-reveal] {
+  --reveal-delay: calc(var(--i, 0) * var(--stagger));
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 760ms var(--ease), transform 760ms var(--ease);
+  transform: translateY(26px);
+  transition:
+    opacity var(--dur-reveal) var(--ease) var(--reveal-delay),
+    transform var(--dur-reveal) var(--ease) var(--reveal-delay),
+    translate var(--dur-base) var(--ease);
 }
 
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
-}
-
-/* Section anchors remain geometrically stable while their content fades in. */
-.section[data-reveal],
-.section[data-reveal].is-visible {
   transform: none;
 }
 
-[data-reveal].is-visible .portrait-ornament__main,
-[data-reveal].is-visible ~ * .portrait-ornament__main {
-  animation: draw-line 1.7s 180ms var(--ease) forwards;
+.whisker path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.1s var(--ease) 250ms;
 }
 
-.dragon-route__main {
-  animation: draw-line 2.8s 320ms var(--ease) forwards;
+.is-visible .whisker path,
+.hero .whisker path,
+.footer .whisker path {
+  stroke-dashoffset: 0;
 }
 
-.portrait-glow {
-  animation: glow-breathe 7s ease-in-out infinite;
+/* ---------- Hero: послідовна поява ---------- */
+
+.hero__enter {
+  animation: rise-in 1s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 80ms);
 }
+
+.hero__art {
+  animation: fade-in 1.4s var(--ease) 200ms both;
+}
+
+.hero__moon {
+  animation: moon-in 1.8s var(--ease) 200ms both;
+}
+
+.dragon-head__ring {
+  animation: draw-line 2.2s var(--ease-in-out) 300ms both;
+}
+
+.dragon-head__ring--outer {
+  animation-delay: 600ms;
+}
+
+.dragon-head__portrait {
+  animation: moon-in 1.6s var(--ease) 250ms both;
+}
+
+.dragon-head__scallops,
+.dragon-head__brows {
+  animation: fade-in 1.2s ease 1.1s both;
+}
+
+.dragon-head__horns,
+.dragon-head__mane,
+.dragon-head__jaw {
+  animation: rise-in 1.4s var(--ease) 1.3s both;
+}
+
+.dragon-head__beard {
+  animation: fade-in 1.4s ease 1.7s both;
+}
+
+.dragon-head__whisker {
+  animation:
+    fade-in 1.4s ease 1.6s both,
+    whisker-sway 9s ease-in-out 3s infinite;
+}
+
+.dragon-head__pearl {
+  animation:
+    pearl-in 1.2s var(--ease) 2.1s both,
+    pearl-breathe 7s ease-in-out 3.4s infinite;
+}
+
+/* ---------- Тіло дракона ---------- */
+
+.dragon-body__edge {
+  animation: draw-line 3.4s var(--ease-in-out) 900ms both;
+}
+
+.dragon-body__fill,
+.dragon-body__halo,
+.dragon-body__scales,
+.dragon-body__spikes,
+.dragon-body__limbs,
+.dragon-body__spine,
+.dragon-body__tail,
+.dragon-echo,
+.dragon-cloud {
+  animation: fade-in 2.4s ease 1.6s both;
+}
+
+/* Паралакс: шари рухаються з різною швидкістю відносно сторінки.
+   Де scroll-timeline немає, той самий зсув задає JS. */
+@supports (animation-timeline: scroll()) {
+  .dragon-layer {
+    animation: dragon-parallax linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  .about__cloud,
+  .booking__cloud {
+    animation: drift-y linear both;
+    animation-timeline: view();
+  }
+}
+
+/* ---------- Фонове листя ---------- */
 
 .site-leaf--left {
-  animation: leaf-drift-left 16s ease-in-out infinite;
+  animation: leaf-drift 16s ease-in-out infinite;
 }
 
 .site-leaf--right {
-  animation: leaf-drift-right 18s ease-in-out infinite;
+  animation: leaf-drift 18s ease-in-out infinite reverse;
+}
+
+/* ---------- Ключові кадри ---------- */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes moon-in {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
 }
 
 @keyframes draw-line {
+  from { stroke-dashoffset: 1; }
   to { stroke-dashoffset: 0; }
 }
 
-@keyframes glow-breathe {
-  0%, 100% { opacity: 0.52; transform: scale(0.96); }
-  50% { opacity: 0.78; transform: scale(1.04); }
+@keyframes dragon-parallax {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, calc(var(--k) * var(--scroll-max) * 1px), 0); }
 }
 
-@keyframes leaf-drift-left {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-9deg); }
-  50% { transform: translate3d(0, -18px, 0) rotate(-5deg); }
+@keyframes whisker-sway {
+  0%, 100% { rotate: 0deg; }
+  50% { rotate: 3deg; }
 }
 
-@keyframes leaf-drift-right {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(168deg); }
-  50% { transform: translate3d(0, 16px, 0) rotate(164deg); }
+@keyframes pearl-in {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
 }
+
+@keyframes pearl-breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.08; }
+}
+
+@keyframes drift-y {
+  from { translate: 0 36px; }
+  to { translate: 0 -36px; }
+}
+
+@keyframes leaf-drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -18px; }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@keyframes lightbox-image-in {
+  from {
+    opacity: 0;
+    scale: 0.985;
+  }
+}
+
+.lightbox[open] {
+  animation: lightbox-in 320ms var(--ease);
+}
+
+.lightbox[open]::backdrop {
+  animation: fade-in 320ms ease;
+}
+
+/* ---------- Зменшений рух ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    transition-delay: 0ms !important;
   }
+
   [data-reveal] {
     opacity: 1;
     transform: none;
   }
-  .dragon-route__main,
-  .portrait-ornament__main {
-    stroke-dashoffset: 0;
+
+  .dragon-layer,
+  .about__cloud,
+  .booking__cloud {
+    animation: none !important;
+  }
+
+  .dragon-spark {
+    display: none;
   }
 }
