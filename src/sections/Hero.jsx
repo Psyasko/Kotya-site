@@ -6,7 +6,6 @@ export default function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero__copy">
-        <p className="eyebrow hero__enter" style={{ '--i': 0 }}>Тиша · увага · відновлення</p>
         <h1>
           <span className="hero__name hero__enter" style={{ '--i': 1 }}>{specialist.name}</span>
           <span className="hero__role hero__enter" style={{ '--i': 2 }}>— {specialist.role}</span>
@@ -34,7 +33,17 @@ export default function Hero() {
         <span className="hero__moon" />
         <DragonHead
           portrait={specialist.photo
-            ? <img src={specialist.photo.src} alt={specialist.photo.alt} fetchPriority="high" />
+            ? (
+              <img
+                src={specialist.photo.src}
+                srcSet={specialist.photo.srcSet}
+                sizes="(max-width: 820px) 220px, 360px"
+                alt={specialist.photo.alt}
+                width="720"
+                height="720"
+                fetchPriority="high"
+              />
+            )
             : <span className="dragon-head__monogram" aria-hidden="true">{specialist.name[0]}</span>}
         />
       </div>
